@@ -29,10 +29,7 @@ function App() {
                         <Nav.Link href="#home">Barrio</Nav.Link>
                         <NavDropdown title="Opciones" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">
-                                Agregar trabajador
-                            </NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">
-                                Agregar propietario
+                                Agregar usuario
                             </NavDropdown.Item>
                             <NavDropdown.Divider />
                             <NavDropdown.Item href="#action/3.4">
