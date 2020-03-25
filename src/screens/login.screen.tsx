@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class Login extends Component {
+class LoginScreen extends Component {
     render (){
         return (
             <form>
@@ -18,9 +18,11 @@ export default class Login extends Component {
 
                 <button type='submit'> Aceptar </button>
                 <p className='registrar-usuario'>
-                    Aun no tiene un usuario? <a href='/sign-up'> Registrarse</a> 
+                    Aun no tiene un usuario? <a href='/register'> Registrarse</a> 
                 </p>
             </form>
         );
     }
 }
+
+export default LoginScreen
