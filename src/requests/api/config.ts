@@ -1,4 +1,4 @@
-import config from './config.settings.json'
+import config from '../config.settings.json'
 
 
 export default class Config {

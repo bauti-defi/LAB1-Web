@@ -1,8 +1,8 @@
 {
     "requestBuilderConfig": {
       "baseUrl": {
-        "testHostBauti": "http://192.168.0.88:10000/",
-        "testHostDiego": "http://192.168.0.204:10000/"
+        "testHostBauti": "http://192.168.0.88:30000/",
+        "testHostDiego": "http://192.168.0.204:30000/"
       },
       "config":{
         "basicConfig": {

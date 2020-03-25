@@ -1,5 +1,5 @@
 import RequestBuilder from './request.builder';
-import Config  from './Config';
+import Config  from './config';
 
 export default class UrlBuilder<T>{
 
