@@ -16,14 +16,14 @@ function App() {
         <BrowserRouter> 
             <div className="App">
                 {/* Navigation Bar */} 
-        <Container fluid>
+        <Container>
             <Navbar bg="dark" variant="dark">
                 <Navbar.Brand href="/">IngresoFácil</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link href="/login">Ingresar</Nav.Link>
-                        <Nav.Link href="#home">Barrio</Nav.Link>
+                        {navbarLink('Ingresar', '/login')}
+                        {navbarLink('Registrar', '/register')}
                         <NavDropdown title="Opciones" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">
                                 Agregar usuario
@@ -52,3 +52,12 @@ function App() {
     );
 }
 export default App;
+
+
+const navbarLink = (title: string, url:string) => {
+    return(
+        <Nav.Link href={url} >
+            <label>{title}</label>
+        </Nav.Link>
+    );
+}

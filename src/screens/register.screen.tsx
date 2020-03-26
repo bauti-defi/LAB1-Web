@@ -28,7 +28,7 @@ class RegisterScreen extends Component<any, State> {
         
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
-        this.showMessage = this.showMessage.bind(this)
+        this.updateMessage = this.updateMessage.bind(this)
     }
 
     handleChange(event){
@@ -42,7 +42,7 @@ class RegisterScreen extends Component<any, State> {
         )
     }
 
-    showMessage(message){
+    updateMessage(message){
         this.setState({message})
     }
 
@@ -55,16 +55,16 @@ class RegisterScreen extends Component<any, State> {
         } = this.state
 
         if(isBlank(name)){
-            this.showMessage('Name is blank!')
+            this.updateMessage('Name is blank!')
             event.preventDefault()
         }else if(isBlank(email)){
-            this.showMessage('Email is blank!')
+            this.updateMessage('Email is blank!')
             event.preventDefault()
         }else if(isBlank(password)){
-            this.showMessage('Password is blank!')
+            this.updateMessage('Password is blank!')
             event.preventDefault()
         }else if(password !== confirm_password){
-            this.showMessage("Passwords don't match!")
+            this.updateMessage("Passwords don't match!")
             event.preventDefault()
         }else{
             axios({
@@ -73,7 +73,7 @@ class RegisterScreen extends Component<any, State> {
                 data:{email, name, password}
             }).then(response => {
                 this.setState({to_login:true})
-            }).catch(error => this.showMessage(`Error: ${error.message}`))
+            }).catch(error => this.updateMessage(`Error: ${error.message}`))
         }
     }
 
