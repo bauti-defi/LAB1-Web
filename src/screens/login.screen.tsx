@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import {withCookies, Cookies} from 'react-cookie'
+import React, { useState } from 'react';
+import {withCookies, useCookies} from 'react-cookie'
 import { Redirect } from 'react-router-dom';
 
 
@@ -12,47 +12,19 @@ interface State{
     logged_in:boolean;
 }
 
-interface Props{
-    cookies:Cookies
-}
+function LoginScreen(){
 
-class LoginScreen extends Component<Props, State> {
+    const [cookie, setCookie] = useCookies(['session'])
 
+    const authenticated = !!cookie.session
 
-    constructor(props){
-        super(props)
-        this.state = {
-            email:'',
-            password:'',
-            message:'',
-            logged_in: !!this.props.cookies.get('session')
-        }
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [message, setMessage] = useState('')
 
-        this.handleChange = this.handleChange.bind(this)
-        this.handleLogin = this.handleLogin.bind(this)
-    }
-
-
-    handleChange(event){
-        const target = event.target
-        const name = target.name
-
-        this.setState((prevState:State, props) => ({
-            ...prevState,
-            [name]:target.value
-        })
-        )
-    }
-
-    updateMessage(message){
-        this.setState({message})
-    }
-
-    handleLogin(event){
-        const {email, password} = this.state
-
+    function handleLogin(event){
         if(isBlank(email) || isBlank(password)){
-            this.updateMessage('Email o contraseña mala.')
+            setMessage('Email o contraseña mala.')
         }else{
             axios({
                 method: 'post',
@@ -60,21 +32,18 @@ class LoginScreen extends Component<Props, State> {
                 data:{email, password}
             }).then(response => {
                 if(response.data === 'Invalid credentials.'){
-                    this.updateMessage('Email o contraseña mala.')
+                    setMessage('Email o contraseña mala.')
                 }else{
-                    this.props.cookies.set('session', response.data)
-                    this.setState({logged_in:!!this.props.cookies.get('session')})
+                    setCookie('session', response.data)
                 }
-            }).catch(error => this.updateMessage('Email o contraseña mala.'))
+            }).catch(error => setMessage('Email o contraseña mala.'))
         }
 
     }
 
-
-    render (){
         return (
             <React.Fragment>
-                {this.state.logged_in? 
+                {authenticated? 
                 <Redirect to='/panel'/>
                 :
                 <React.Fragment>
@@ -82,18 +51,18 @@ class LoginScreen extends Component<Props, State> {
 
                     <div className="form-group">
                         <label>Email</label>
-                        <input type='email' name='email' className='form-control' placeholder='email' onChange={this.handleChange}/>
+                        <input type='email' name='email' className='form-control' placeholder='email' onChange={(event) => setEmail(event.target.value)}/>
                     </div>
 
                     <div className='form-group'>
                         <label>Contraseña</label>
-                        <input type='password' name='password' className='form-control' placeholder='Contraseña' onChange={this.handleChange}/>
+                        <input type='password' name='password' className='form-control' placeholder='Contraseña' onChange={(event) => setPassword(event.target.value)}/>
                     </div>
                     <div>
-                        <label>{this.state.message}</label>
+                        <label>{message}</label>
                     </div>
                 
-                    <button type='button' onClick={this.handleLogin}> Ingresar </button>
+                    <button type='button' onClick={handleLogin}> Ingresar </button>
                     <p className='registrar-usuario'>
                         Aun no tiene un usuario? <a href='/register'> Registrarse</a> 
                     </p>
@@ -101,12 +70,13 @@ class LoginScreen extends Component<Props, State> {
                 }
             </React.Fragment>
         );
-    }
 }
-
-export default withCookies(LoginScreen)
 
 
 function isBlank(str) {
     return (!str || /^\s*$/.test(str));
 }
+
+export default withCookies(LoginScreen)
+
+

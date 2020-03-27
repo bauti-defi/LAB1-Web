@@ -1,21 +1,18 @@
-import React, { Component } from "react";
-import { withCookies, Cookies } from "react-cookie";
+import React from "react";
+import {useCookies } from "react-cookie";
+import { Button } from "react-bootstrap";
 
 
-interface Props{
-    cookies:Cookies;
-}
 
-class PanelScreen extends Component<Props, any>{
+export default function PanelScreen(){
 
-    render(){
-    return (
+    const [cookie] = useCookies(['session'])
+
+    return(
         <React.Fragment>
-            <label>Cookie: {JSON.stringify(this.props.cookies)}</label>
+            <Button type='button' onClick={() => console.log(JSON.stringify(cookie.session))} >Show!</Button>
         </React.Fragment>
-    )
-    }
-
+    );
 }
 
-export default withCookies(PanelScreen)
+
