@@ -70,11 +70,7 @@ class LoginScreen extends Component<Props, State> {
 
     render (){
         return (
-            <form>
-                {!!this.props.cookies.get('session')?
-                <Redirect to='/panel'/>
-                :
-                <React.Fragment>
+            <React.Fragment>
                 <h3>Ingresar</h3>
 
                 <div className="form-group">
@@ -94,8 +90,7 @@ class LoginScreen extends Component<Props, State> {
                 <p className='registrar-usuario'>
                     Aun no tiene un usuario? <a href='/register'> Registrarse</a> 
                 </p>
-                </React.Fragment>}
-            </form>
+            </React.Fragment>
         );
     }
 }
