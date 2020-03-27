@@ -9,6 +9,7 @@ interface State{
     email:string;
     password:string;
     message:string;
+    logged_in:boolean;
 }
 
 interface Props{
@@ -24,6 +25,7 @@ class LoginScreen extends Component<Props, State> {
             email:'',
             password:'',
             message:'',
+            logged_in: !!this.props.cookies.get('session')
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -61,6 +63,7 @@ class LoginScreen extends Component<Props, State> {
                     this.updateMessage('Email o contraseña mala.')
                 }else{
                     this.props.cookies.set('session', response.data)
+                    this.setState({logged_in:!!this.props.cookies.get('session')})
                 }
             }).catch(error => this.updateMessage('Email o contraseña mala.'))
         }
@@ -71,25 +74,31 @@ class LoginScreen extends Component<Props, State> {
     render (){
         return (
             <React.Fragment>
-                <h3>Ingresar</h3>
+                {this.state.logged_in? 
+                <Redirect to='/panel'/>
+                :
+                <React.Fragment>
+                    <h3>Ingresar</h3>
 
-                <div className="form-group">
-                    <label>Email</label>
-                    <input type='email' name='email' className='form-control' placeholder='email' onChange={this.handleChange}/>
-                </div>
+                    <div className="form-group">
+                        <label>Email</label>
+                        <input type='email' name='email' className='form-control' placeholder='email' onChange={this.handleChange}/>
+                    </div>
 
-                <div className='form-group'>
-                    <label>Contraseña</label>
-                    <input type='password' name='password' className='form-control' placeholder='Contraseña' onChange={this.handleChange}/>
-                </div>
-                <div>
-                    <label>{this.state.message}</label>
-                </div>
-            
-                <button type='button' onClick={this.handleLogin}> Ingresar </button>
-                <p className='registrar-usuario'>
-                    Aun no tiene un usuario? <a href='/register'> Registrarse</a> 
-                </p>
+                    <div className='form-group'>
+                        <label>Contraseña</label>
+                        <input type='password' name='password' className='form-control' placeholder='Contraseña' onChange={this.handleChange}/>
+                    </div>
+                    <div>
+                        <label>{this.state.message}</label>
+                    </div>
+                
+                    <button type='button' onClick={this.handleLogin}> Ingresar </button>
+                    <p className='registrar-usuario'>
+                        Aun no tiene un usuario? <a href='/register'> Registrarse</a> 
+                    </p>
+                </React.Fragment>
+                }
             </React.Fragment>
         );
     }

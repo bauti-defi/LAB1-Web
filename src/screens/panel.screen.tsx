@@ -9,7 +9,11 @@ interface Props{
 class PanelScreen extends Component<Props, any>{
 
     render(){
-    return (<label>Cookie: {JSON.stringify(this.props.cookies)}</label>)
+    return (
+        <React.Fragment>
+            <label>Cookie: {JSON.stringify(this.props.cookies)}</label>
+        </React.Fragment>
+    )
     }
 
 }

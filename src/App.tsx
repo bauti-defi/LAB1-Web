@@ -1,79 +1,84 @@
 import React, { Component } from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import {
-    Navbar,
-    Nav,
-    NavDropdown,
-    Container
-} from "react-bootstrap";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import RegisterScreen from './screens/register.screen';
-import LoginScreen from './screens/login.screen';
-import PanelScreen from "./screens/panel.screen";
+import { Switch, Route, BrowserRouter, Redirect } from "react-router-dom";
+import LoginScreen from './screens/login.screen'
 import {Cookies, withCookies } from "react-cookie";
+import RegisterScreen from "./screens/register.screen";
+import PanelScreen from "./screens/panel.screen";
+import { Nav, Navbar, Container, Button } from "react-bootstrap";
 
 
 interface Props{
     cookies:Cookies;
 }
 
+const axios = require('axios').default;
+
 class App extends Component<Props,any>{
 
-    render(){
-        return ( 
-            <BrowserRouter> 
-                <div className="App">
-                    {/* Navigation Bar */} 
-            <Container>
-                <Navbar bg="dark" variant="dark">
-                    <Navbar.Brand href="/">IngresoFácil</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="mr-auto">
-                            {navbarLink('Ingresar', '/login')}
-                            {navbarLink('Registrar', '/register')}
-                            <NavDropdown title="Opciones" id="basic-nav-dropdown">
-                                <NavDropdown.Item href="#action/3.1">
-                                    Agregar usuario
-                                </NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action/3.4">
-                                    Separated link
-                                </NavDropdown.Item>
-                            </NavDropdown>
-                        </Nav>
-                    </Navbar.Collapse>
-                </Navbar>
-            </Container>
-            </div>
-        
-                {/* Route management */}
-                <div className="auth-wrapper">
-                    <div className="auth-inner">
-                        <Switch>
-                            <PrivateRoute allow={false} path='/panel'>
-                                <PanelScreen/>
-                            </PrivateRoute>
-                            <Route exact path='/login' component={LoginScreen} />
-                            <Route exact path='/register' component={RegisterScreen} />
-                        </Switch>
-                    </div>
-                </div>
-            </BrowserRouter>
-        );
+    constructor(props){
+      super(props)
+
+      this.handleLogOut = this.handleLogOut.bind(this)
+      this.sessionCookieListener = this.sessionCookieListener.bind(this)
     }
 
+    componentDidMount(){
+      this.props.cookies.addChangeListener(this.sessionCookieListener)
+    }
+
+    sessionCookieListener(event){
+      if(event.name === 'session'){
+        this.forceUpdate()
+      }
+    }
+
+    handleLogOut(event){
+      this.props.cookies.remove('session')
+    }
+
+    render(){
+        const authenticated = !!this.props.cookies.get('session')
+        return ( 
+        <BrowserRouter>
+            <Navbar expand='xl' bg="dark" variant="dark"  >
+                <Navbar.Brand href="/">
+                    <label>IngresoFácil</label>
+                </Navbar.Brand>
+                  {!authenticated?
+                    <Nav>
+                      <Nav.Link href="/login">Ingresar</Nav.Link>
+                      <Nav.Link href="/register">Registrar</Nav.Link>
+                    </Nav>
+                    :
+                    <Nav>
+                      <Button variant='outline-light' href='/' onClick={this.handleLogOut}> Salir </Button>
+                    </Nav>
+                  }
+            </Navbar>
+            <Switch>
+                <PrivateRoute authenticated path='/panel' component={PanelScreen}/>
+                <Route path='/login' component={LoginScreen}/>
+                <Route path='/register' component={RegisterScreen}/>
+                <Route path='/'>
+                    {authenticated?
+                    <Redirect to='/panel'/>
+                    :
+                    <Redirect to='/login'/>}
+                </Route>
+            </Switch>
+        </BrowserRouter>
+        );
+    }
 }
 
-
-function PrivateRoute(allow, { children, ...rest }) {
-
+function PrivateRoute(isAuthenticated, { children, ...rest }) {
     return (
       <Route
         {...rest}
         render={({ location }) =>
-            allow? (
+        isAuthenticated ? (
             children
           ) : (
             <Redirect
@@ -87,16 +92,5 @@ function PrivateRoute(allow, { children, ...rest }) {
       />
     );
   }
-
-const navbarLink = (title: string, url:string) => {
-    return(
-        <Nav.Link href={url} >
-            <label>{title}</label>
-        </Nav.Link>
-    );
-}
-
-
-
 
 export default withCookies(App);

@@ -3,16 +3,12 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { BrowserRouter as Router } from "react-router-dom";
 import { CookiesProvider } from "react-cookie";
 
 ReactDOM.render(
-    
     <React.StrictMode>
         <CookiesProvider>
-            <Router>
-                <App />
-            </Router>
+            <App />
         </CookiesProvider>
     </React.StrictMode>,
     document.getElementById("root")

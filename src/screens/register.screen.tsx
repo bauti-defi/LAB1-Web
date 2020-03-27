@@ -1,5 +1,6 @@
 import React, { Component  } from 'react';
 import { Redirect } from 'react-router-dom';
+import { withCookies } from 'react-cookie';
 
 const axios = require('axios').default;
 
@@ -79,10 +80,11 @@ class RegisterScreen extends Component<any, State> {
 
     render(){
         return (
-            <form>
-            {this.state.to_login? 
-            <Redirect to='/login' />:
-            <div>
+           <React.Fragment>
+            {this.state.to_login || !!this.props.cookies.get('session') ? 
+            <Redirect to='/login' />
+            :
+            <React.Fragment>
                 <h3>Registrarse</h3>
                 <label>{this.state.message}</label>
                 <div className="form-group">
@@ -107,9 +109,9 @@ class RegisterScreen extends Component<any, State> {
                 </div>
 
                 <button type='button' onClick={this.handleSubmit}> Registrar </button>
-            </div>
+            </React.Fragment>
             }
-            </form>
+            </React.Fragment>
         );
     }
 }
@@ -120,4 +122,4 @@ function isBlank(str) {
 
 
 
-export default RegisterScreen
+export default withCookies(RegisterScreen)
