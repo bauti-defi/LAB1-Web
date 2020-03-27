@@ -10,6 +10,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import RegisterScreen from './screens/register.screen';
 import LoginScreen from './screens/login.screen';
+import PanelScreen from "./screens/panel.screen";
 
 function App() {
     return (
@@ -45,6 +46,7 @@ function App() {
                     <Switch>
                         <Route exact path='/login' component={LoginScreen} />
                         <Route exact path='/register' component={RegisterScreen} />
+                        <Route exact path='/panel' component={PanelScreen} />
                     </Switch>
                 </div>
             </div>

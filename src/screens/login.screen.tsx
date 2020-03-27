@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import {withCookies, Cookies} from 'react-cookie'
+import { Redirect } from 'react-router-dom';
 
 
 const axios = require('axios').default;
-
 
 interface State{
     email:string;
@@ -10,14 +11,19 @@ interface State{
     message:string;
 }
 
-class LoginScreen extends Component<any, State> {
+interface Props{
+    cookies:Cookies
+}
+
+class LoginScreen extends Component<Props, State> {
+
 
     constructor(props){
         super(props)
         this.state = {
             email:'',
             password:'',
-            message:''
+            message:'',
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -54,7 +60,7 @@ class LoginScreen extends Component<any, State> {
                 if(response.data === 'Invalid credentials.'){
                     this.updateMessage('Email o contraseña mala.')
                 }else{
-                    console.log(response.data)
+                    this.props.cookies.set('session', response.data)
                 }
             }).catch(error => this.updateMessage('Email o contraseña mala.'))
         }
@@ -65,6 +71,10 @@ class LoginScreen extends Component<any, State> {
     render (){
         return (
             <form>
+                {!!this.props.cookies.get('session')?
+                <Redirect to='/panel'/>
+                :
+                <React.Fragment>
                 <h3>Ingresar</h3>
 
                 <div className="form-group">
@@ -77,20 +87,20 @@ class LoginScreen extends Component<any, State> {
                     <input type='password' name='password' className='form-control' placeholder='Contraseña' onChange={this.handleChange}/>
                 </div>
                 <div>
-                <label>{this.state.message}</label>
+                    <label>{this.state.message}</label>
                 </div>
             
                 <button type='button' onClick={this.handleLogin}> Ingresar </button>
                 <p className='registrar-usuario'>
                     Aun no tiene un usuario? <a href='/register'> Registrarse</a> 
                 </p>
+                </React.Fragment>}
             </form>
         );
     }
 }
 
-export default LoginScreen
-
+export default withCookies(LoginScreen)
 
 
 function isBlank(str) {
