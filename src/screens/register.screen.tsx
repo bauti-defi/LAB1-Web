@@ -54,7 +54,9 @@ function RegisterScreen(){
             {isRegistered || authenticated ? 
             <Redirect to='/login' />
             :
-            <React.Fragment>
+            <div style={{
+                position: 'absolute', left: '50%', top: '50%',
+            }}>
                 <h3>Registrarse</h3>
                 <label>{message}</label>
                 <div className="form-group">
@@ -73,13 +75,16 @@ function RegisterScreen(){
                     <label>Ingrese la contraseña
                     <input type='password' name='password' value={password} onChange={(event) => setPassword(event.target.value)} className='form-control' placeholder=''/>
                     </label>
+                </div>
+
+                <div>
                     <label> Ingrese nuevamente la contraseña 
-                    <input type='password' name='confirm_password' value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} className='form-control' placeholder=''/>
+                        <input type='password' name='confirm_password' value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} className='form-control' placeholder=''/>
                     </label>
                 </div>
 
                 <button type='button' onClick={handleSubmit}> Registrar </button>
-            </React.Fragment>
+            </div>
             }
             </React.Fragment>
         );

@@ -39,7 +39,9 @@ function LoginScreen(){
                 {authenticated? 
                 <Redirect to='/panel'/>
                 :
-                <React.Fragment>
+                <div style={{
+                    position: 'absolute', left: '50%', top: '50%',
+                }}>
                     <h3>Ingresar</h3>
 
                     <div className="form-group">
@@ -59,7 +61,7 @@ function LoginScreen(){
                     <p className='registrar-usuario'>
                         Aun no tiene un usuario? <a href='/register'> Registrarse</a> 
                     </p>
-                </React.Fragment>
+                </div>
                 }
             </React.Fragment>
         );

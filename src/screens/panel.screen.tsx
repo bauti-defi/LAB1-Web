@@ -27,18 +27,20 @@ export default function PanelScreen(){
     }
 
     return(
-        <React.Fragment>
+        <div style={{
+            position: 'absolute', left: '50%', top: '50%',
+        }}>
             {showQR?
-            <React.Fragment>
+            <div>
                 <QRCode value={invitationCode} />
                 <div>
                     <Button type='button' onClick={(e) => setShowQR(false)} >Ocultar</Button>
                 </div>
-            </React.Fragment>
+            </div>
             :
             <Button type='button' onClick={requestInvite} >Mostrar Invitacion QR</Button>
             }
-        </React.Fragment>
+        </div>
     );
 }
 
