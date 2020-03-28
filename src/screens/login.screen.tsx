@@ -5,13 +5,6 @@ import { Redirect } from 'react-router-dom';
 
 const axios = require('axios').default;
 
-interface State{
-    email:string;
-    password:string;
-    message:string;
-    logged_in:boolean;
-}
-
 function LoginScreen(){
 
     const [cookie, setCookie] = useCookies(['session'])
