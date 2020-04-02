@@ -16,9 +16,9 @@ export default function PanelScreen(){
     function requestInvite(event){
         axios({
             method: 'get',
-            url: 'http://localhost:3500/admin/new/invite',
+            url: 'http://localhost:3500/barrio/new/invite',
             headers: {
-                Authorization: cookie.session
+                Authorization: cookie.session.jwt
             }
         }).then(response => {
             setInvitationCode(response.data)

@@ -41,7 +41,7 @@ function RegisterScreen(){
         }else{
             axios({
                 method: 'post',
-                url: 'http://localhost:3500/admin/register',
+                url: 'http://localhost:3500/barrio/register',
                 data:{email, name, password}
             }).then(response => {
                 setIsRegistered(true)
