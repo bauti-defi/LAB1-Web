@@ -21,7 +21,7 @@ function LoginScreen(){
         }else{
             axios({
                 method: 'post',
-                url: 'http://localhost:3500/barrio/login',
+                url: 'http://localhost:3500/auth/login',
                 data:{email, password}
             }).then(response => {
                 if(response.data === 'Invalid credentials.'){
