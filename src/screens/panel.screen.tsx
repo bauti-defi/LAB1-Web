@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import {useCookies } from "react-cookie";
 import { Button } from "react-bootstrap";
 
-
 const axios = require('axios').default;
 
 var QRCode = require('qrcode.react');
@@ -26,10 +25,15 @@ export default function PanelScreen(){
         })
     }
 
+
     return(
+    
         <div style={{
             position: 'absolute', left: '50%', top: '50%',
         }}>
+                   <div>
+                       <h3>BarrioScreen</h3></div> 
+
             {showQR?
             <div>
                 <QRCode value={invitationCode} />
@@ -41,6 +45,7 @@ export default function PanelScreen(){
             <Button type='button' onClick={requestInvite} >Mostrar Invitacion QR</Button>
             }
         </div>
+
     );
 }
 

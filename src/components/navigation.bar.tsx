@@ -19,7 +19,7 @@ function NavigationBar(){
             <Nav>
                 <Nav.Link href="/login">Ingresar</Nav.Link>
                 <Nav.Link href="/register">Registrar</Nav.Link>
-                <Button variant='outline-light' href='/barrio'> Barrio </Button>
+                <Nav.Link href="/register">Registrar</Nav.Link>
             </Nav>
             :
             <Nav>

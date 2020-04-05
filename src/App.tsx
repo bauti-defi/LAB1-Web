@@ -6,7 +6,6 @@ import LoginScreen from './screens/login.screen'
 import {useCookies} from "react-cookie";
 import RegisterScreen from "./screens/register.screen";
 import PanelScreen from "./screens/panel.screen";
-import BarrioScreen from "./screens/barrio.screen";
 import NavigationBar from "./components/navigation.bar";
 
 function App(){
@@ -24,7 +23,6 @@ function App(){
             </PrivateRoute>
             <Route path='/login' component={LoginScreen}/>
             <Route path='/register' component={RegisterScreen}/>
-            <Route path='/barrio' component={BarrioScreen}/>
             <Route path='/'>
                 {authenticated?
                 <Redirect to='/panel'/>
