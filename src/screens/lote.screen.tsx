@@ -2,17 +2,8 @@ import React, { useState } from "react";
 import { withCookies, useCookies } from "react-cookie";
 import { Redirect } from "react-router-dom";
 import MaterialTable from "material-table";
+import { AddBox, ArrowDownward} from '@material-ui/icons';
 const axios = require("axios").default;
-
-// function Table() {
-//   return (
-//     <React.Fragment>
-//       <div>
-//         <h3>Hola</h3>
-//       </div>
-//     </React.Fragment>
-//   );
-// }
 
 function Table() {
   return (
@@ -23,9 +14,9 @@ function Table() {
       detailPanel={(rowData) => {
         return (
           <div>
-{ 
-            rowData.members.map(string =><h3>{string}</h3>)
- }
+            {rowData.members.map((string) => (
+              <h3>{string}</h3>
+            ))}
           </div>
         );
       }}
