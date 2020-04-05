@@ -3,10 +3,16 @@ import { withCookies, useCookies } from "react-cookie";
 import { Redirect } from "react-router-dom";
 import MaterialTable from "material-table";
 import { AddBox, ArrowDownward} from '@material-ui/icons';
+
 const axios = require("axios").default;
 
 function Table() {
   return (
+      <React.Fragment>
+          <link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  />
     <MaterialTable
       title="Lista de Lotes"
       columns={[{ title: "Nombre/Número", field: "name" }]}
@@ -21,7 +27,11 @@ function Table() {
         );
       }}
     />
+    </React.Fragment>
+
   );
 }
+
+
 
 export default Table;
