@@ -10,12 +10,12 @@ function Table() {
     <MaterialTable
       title="Lista de Lotes"
       columns={[{ title: "Nombre/Número", field: "name" }]}
-      data={[{ name: "Diego", members: ["aa", "bb"] }]}
+      data={[{ name: "316", members: ["Diego", "Camila"] }]}
       detailPanel={(rowData) => {
         return (
           <div>
             {rowData.members.map((string) => (
-              <h3>{string}</h3>
+              <h5>{string}</h5>
             ))}
           </div>
         );
