@@ -19,11 +19,10 @@ function NavigationBar(){
             <Nav>
                 <Nav.Link href="/login">Ingresar</Nav.Link>
                 <Nav.Link href="/register">Registrar</Nav.Link>
-                <Nav.Link href="/register">Registrar</Nav.Link>
             </Nav>
             :
             <Nav>
-                <Button variant='outline-light' href='/'> Lotes </Button>
+                <Button variant='outline-light' href='/lotescreen'> Lotes </Button>
                 <Button variant='outline-light' href='/' onClick={() => removeCookie('session', '')}> Salir </Button>
             </Nav>
             }

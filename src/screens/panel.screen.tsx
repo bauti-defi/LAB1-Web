@@ -32,7 +32,7 @@ export default function PanelScreen(){
             position: 'absolute', left: '50%', top: '50%',
         }}>
                    <div>
-                       <h3>BarrioScreen</h3></div> 
+                       <h3>Acá voy a mostrar la info del barrio</h3></div> 
 
             {showQR?
             <div>
