@@ -28,6 +28,7 @@ function LoginScreen(){
                     setMessage('Email o contraseña mala.')
                 }else{
                     setCookie('session', response.data)
+                    console.log(response.data)
                 }
             }).catch(error => setMessage('Email o contraseña mala.'))
         }
