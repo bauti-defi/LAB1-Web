@@ -17,7 +17,7 @@ export default function PanelScreen(){
             method: 'get',
             url: 'http://localhost:3500/barrio/new/invite',
             headers: {
-                Authorization: cookie.session.jwt
+                Authorization: cookie.session
             }
         }).then(response => {
             setInvitationCode(response.data)

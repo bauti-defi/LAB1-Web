@@ -4,16 +4,6 @@ import { useCookies } from 'react-cookie';
 
 const axios = require('axios').default;
 
-
-interface State{
-    email:string;
-    name:string;
-    password:string;
-    confirm_password:string;
-    message:string;
-    to_login:boolean;
-}
-
 function RegisterScreen(){
 
     const [cookie] = useCookies(['session'])
