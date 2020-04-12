@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { withCookies, useCookies } from "react-cookie";
 import MaterialTable from "material-table";
+import React, { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 import Popup from "reactjs-popup";
-import { resolve } from "dns";
 
 const axios = require("axios").default;
 
@@ -67,18 +66,20 @@ function LoteScreen() {
             method: "delete",
             url: "http://localhost:3500/lote/delete",
             params: {
-              lote: oldData.lote_id
+              lote: oldData.lote_id,
             },
             headers: {
               Authorization: cookie.session.token,
             },
-          }).then(response => {
-            if(response){
-              setLotes([...lotes.filter(lote => lote.lote_id != oldData.lote_id)])
-              resolve()
+          }).then((response) => {
+            if (response) {
+              setLotes([
+                ...lotes.filter((lote) => lote.lote_id != oldData.lote_id),
+              ]);
+              resolve();
             }
-            reject()
-          })
+            reject();
+          });
         }, 2000);
       });
     },
