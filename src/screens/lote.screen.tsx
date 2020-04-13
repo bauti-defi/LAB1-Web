@@ -2,8 +2,13 @@ import MaterialTable from "material-table";
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import Popup from "reactjs-popup";
-
-const axios = require("axios").default;
+import {
+  createInvite,
+  createLote,
+  CreateLoteDTO,
+  deleteLote,
+  getAll,
+} from "../requests/lotes.requests";
 
 var QRCode = require("qrcode.react");
 
@@ -11,67 +16,52 @@ function LoteScreen() {
   const [cookie] = useCookies(["session"]);
   const [lotes, setLotes] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showQR, setShowQR] = useState(false);
-  const [associationURL, setAssociationURL] = useState(null);
+  const [QR, setQR] = useState(null);
 
   const actions = [
     {
       icon: "important_devices",
       tooltip: "Asociar Propietario",
-      onClick: (event, rowData) => {
-        setAssociationURL(
-          `lote/associate?lote=${rowData.lote_id}&barrio=${cookie.session.acc_id}`
-        );
-        setShowQR(true);
+      onClick: async (event, rowData) => {
+        setLoading(true);
+        await createInvite(
+          rowData.lote_id,
+          cookie.session.token
+        ).then((response) => setQR(response.data));
+        setLoading(false);
       },
     },
   ];
 
-  const edit = {
+  const edit_actions = {
     isEditable: (rowData) => false,
     isDeletable: (rowData) => true,
-    onRowAdd: (newData) => {
-      let data = newData;
+    onRowAdd: (newRow) => {
+      const dto: CreateLoteDTO = {
+        name: newRow.lote_name,
+        num: +newRow.lote_num,
+        street: newRow.lote_street,
+        code: +newRow.lote_code,
+      };
       return new Promise((resolve, reject) => {
         setTimeout(
           () =>
-            axios({
-              method: "post",
-              url: "http://localhost:3500/lote/new",
-              data: {
-                name: newData.lote_name,
-                num: +newData.lote_num,
-                street: newData.lote_street,
-                code: +newData.lote_code,
-              },
-              headers: {
-                Authorization: cookie.session.token,
-              },
-            }).then((response) => {
+            createLote(dto, cookie.session.token).then((response) => {
               if (response.data) {
-                data.propietarios = [];
-                setLotes([...lotes, data]);
+                newRow.propietarios = [];
+                setLotes([...lotes, newRow]);
                 resolve();
               }
               reject();
             }),
-          2000
+          3000
         );
       });
     },
     onRowDelete: (oldData) => {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
-          axios({
-            method: "delete",
-            url: "http://localhost:3500/lote/delete",
-            params: {
-              lote: oldData.lote_id,
-            },
-            headers: {
-              Authorization: cookie.session.token,
-            },
-          }).then((response) => {
+          deleteLote(oldData.lote_id, cookie.session.token).then((response) => {
             if (response) {
               setLotes([
                 ...lotes.filter((lote) => lote.lote_id != oldData.lote_id),
@@ -80,19 +70,13 @@ function LoteScreen() {
             }
             reject();
           });
-        }, 2000);
+        }, 3000);
       });
     },
   };
 
   useEffect(() => {
-    axios({
-      method: "get",
-      url: "http://localhost:3500/lote/all",
-      headers: {
-        Authorization: cookie.session.token,
-      },
-    })
+    getAll(cookie.session.token)
       .then((response) => {
         setLotes(response.data);
         setLoading(false);
@@ -106,16 +90,12 @@ function LoteScreen() {
         rel="stylesheet"
         href="https://fonts.googleapis.com/icon?family=Material+Icons"
       />
-      <Popup
-        open={showQR}
-        closeOnDocumentClick
-        onClose={() => setShowQR(false)}
-      >
-        <QRCode value={associationURL} includeMargin={true} size={512} />
+      <Popup open={!!QR} closeOnDocumentClick onClose={() => setQR(null)}>
+        <QRCode value={QR} includeMargin={true} size={512} />
       </Popup>
       <MaterialTable
         title="Lista de Lotes"
-        editable={edit}
+        editable={edit_actions}
         actions={actions}
         isLoading={loading}
         columns={columns}
