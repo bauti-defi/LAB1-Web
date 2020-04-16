@@ -59,6 +59,7 @@ function RegisterScreen() {
               <input
                 type="text"
                 name="name"
+                autoCapitalize="words"
                 value={name}
                 onChange={(event) => setName(event.target.value)}
                 className="form-control"
