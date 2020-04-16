@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 const axios = require("axios").default;
 
 function LoginScreen() {
-  const [cookie, setCookie] = useCookies(["session"]);
+  const [cookie, setCookie] = useCookies();
 
   const authenticated = !!cookie.session;
 

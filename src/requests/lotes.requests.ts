@@ -3,7 +3,7 @@ const axios = require("axios").default;
 export const getAll = (token: string) =>
   axios({
     method: "get",
-    url: "http://localhost:3500/lote/all",
+    url: "http://localhost:3500/lote/barrio/all",
     headers: {
       Authorization: token,
     },
@@ -33,8 +33,8 @@ export const createLote = (data: CreateLoteDTO, token: string) =>
 
 export const createInvite = (lote_id: string, token: string) =>
   axios({
-    method: "get",
-    url: "http://localhost:3500/lote/invite",
+    method: "post",
+    url: "http://localhost:3500/invite/prop/to/lote",
     params: {
       lote: lote_id,
     },

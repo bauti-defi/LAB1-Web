@@ -13,7 +13,7 @@ import {
 var QRCode = require("qrcode.react");
 
 function LoteScreen() {
-  const [cookie] = useCookies(["session"]);
+  const [cookie] = useCookies();
   const [lotes, setLotes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [QR, setQR] = useState(null);
@@ -27,7 +27,7 @@ function LoteScreen() {
         await createInvite(
           rowData.lote_id,
           cookie.session.token
-        ).then((response) => setQR(response.data));
+        ).then((response) => setQR(JSON.stringify(response.data)));
         setLoading(false);
       },
     },
