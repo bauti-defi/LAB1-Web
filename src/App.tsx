@@ -5,7 +5,7 @@ import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import "./App.css";
 import NavigationBar from "./components/navigation.bar";
 import LoginScreen from "./screens/login.screen";
-import Table from "./screens/lote.screen";
+import Table from "./screens/lotes/lote.screen";
 import PanelScreen from "./screens/panel.screen";
 import RegisterScreen from "./screens/register.screen";
 
