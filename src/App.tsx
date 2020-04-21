@@ -21,11 +21,15 @@ function App() {
         <PrivateRoute path="/panel">
           <PanelScreen />
         </PrivateRoute>
-        <Route path="/login" component={LoginScreen} />
-        <Route path="/register" component={RegisterScreen} />
-        <Route path="/lotescreen" component={Table} />
+        <Route path="/ingresar" component={LoginScreen} />
+        <Route path="/registrar" component={RegisterScreen} />
+        <Route path="/lotes" component={Table} />
         <Route path="/">
-          {authenticated ? <Redirect to="/panel" /> : <Redirect to="/login" />}
+          {authenticated ? (
+            <Redirect to="/panel" />
+          ) : (
+            <Redirect to="/ingresar" />
+          )}
         </Route>
       </Switch>
     </BrowserRouter>
@@ -46,7 +50,7 @@ function PrivateRoute({ children, ...rest }) {
         ) : (
           <Redirect
             to={{
-              pathname: "/login",
+              pathname: "/ingresar",
               state: { from: location },
             }}
           />
