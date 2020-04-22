@@ -6,7 +6,7 @@ function HomeNavBar() {
     <div>
       <ul>
         <li>
-          <Link to="lotes">Lotes</Link>
+          <Link to="/lotes">Lotes</Link>
         </li>
         <li>
           <Link to="/salir">Salir</Link>

@@ -1,9 +1,9 @@
 import React from "react";
 import { useCookies } from "react-cookie";
 import { Link } from "react-router-dom";
-import HomeNavBar from "./home.nav.bar";
-import LandingNavBar from "./landing.nav.bar";
 import "../styling/nav.bar.css";
+import HomeNavBar from "./home.nav.bar";
+import LoginNavBar from "./login.nav.bar";
 
 function NavigationBar() {
   const [cookie] = useCookies();
@@ -18,7 +18,7 @@ function NavigationBar() {
             IngresoFácil
           </Link>
         </li>
-        {!authenticated ? <LandingNavBar /> : <HomeNavBar />}
+        {!authenticated ? <LoginNavBar /> : <HomeNavBar />}
       </ul>
     </div>
   );

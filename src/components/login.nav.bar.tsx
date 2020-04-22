@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function LandingNavBar() {
+function LoginNavBar() {
   return (
     <div>
       <li>
@@ -14,4 +14,4 @@ function LandingNavBar() {
   );
 }
 
-export default LandingNavBar;
+export default LoginNavBar;
