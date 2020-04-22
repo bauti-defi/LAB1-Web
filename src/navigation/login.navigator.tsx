@@ -7,11 +7,11 @@ function LoginNavigator() {
   return (
     <div>
       <Switch>
-        <Route path="/">
-          <Redirect to="/ingresar" />
-        </Route>
         <Route path="/ingresar" component={LoginScreen} />
         <Route path="/registrar" component={RegisterScreen} />
+        <Route>
+          <Redirect to="/ingresar" />
+        </Route>
       </Switch>
     </div>
   );

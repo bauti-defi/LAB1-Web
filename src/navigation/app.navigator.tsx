@@ -1,17 +1,14 @@
 import React from "react";
-import { useCookies } from "react-cookie";
+import { useCookies, withCookies } from "react-cookie";
 import LoginNavigator from "./login.navigator";
+import PanelNavigator from "./panel.navigator";
 
 function AppNavigator() {
   const [cookie] = useCookies();
 
-  const authenticated = !!cookie.session;
+  const authenticated: boolean = !!cookie.session;
 
-  return (
-    <div>
-      <LoginNavigator />
-    </div>
-  );
+  return authenticated ? <PanelNavigator /> : <LoginNavigator />;
 }
 
-export default AppNavigator;
+export default withCookies(AppNavigator);

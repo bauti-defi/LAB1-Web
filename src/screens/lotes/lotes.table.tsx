@@ -1,6 +1,6 @@
 import MaterialTable from "material-table";
 import React, { useState } from "react";
-import { useCookies } from "react-cookie";
+import { useCookies, withCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import {
   createInvite,
@@ -97,4 +97,4 @@ const columns = [
   { title: "Codigo Postal", field: "code" },
 ];
 
-export default LotesTable;
+export default withCookies(LotesTable);

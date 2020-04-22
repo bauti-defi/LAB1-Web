@@ -8,7 +8,7 @@
 #home {
   font-size: 20px;
   text-decoration: none;
-  color: #CBD1D4;
+  color: #cbd1d4;
 }
 
 li {
@@ -29,20 +29,19 @@ ul {
   overflow: hidden;
   display: block;
   list-style-type: none;
-  background-color: #414B56;
+  background-color: #414b56;
 }
-
 
 /* Href colors */
 li a {
   text-decoration: none;
-  color:#CBD1D4;
+  color: #cbd1d4;
   display: block;
   padding: 8px 16px;
   text-align: center;
 }
 li a:hover {
-  color: #CBD1D4;
+  color: #cbd1d4;
   text-decoration: none;
   background-color: #627182;
 }
