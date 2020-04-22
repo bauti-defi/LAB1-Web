@@ -3,7 +3,7 @@ import { useCookies } from "react-cookie";
 import { Link } from "react-router-dom";
 import HomeNavBar from "./home.nav.bar";
 import LandingNavBar from "./landing.nav.bar";
-import "./nav.bar.css";
+import "../styling/nav.bar.css";
 
 function NavigationBar() {
   const [cookie] = useCookies();
