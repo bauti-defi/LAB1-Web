@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useCookies } from "react-cookie";
 import { Redirect } from "react-router-dom";
+import '../styling/form.group.css'
 
 const axios = require("axios").default;
 
@@ -43,11 +44,11 @@ function RegisterScreen() {
       {isRegistered || authenticated ? (
         <Redirect to="/login" />
       ) : (
-        <div
+        <div  
           style={{
             position: "absolute",
-            left: "50%",
-            top: "50%",
+            left: "5%",
+            top: "10%",
           }}
         >
           <h3>Registrarse</h3>
@@ -97,7 +98,7 @@ function RegisterScreen() {
             </label>
           </div>
 
-          <div>
+          <div className='form-group'>
             <label>
               {" "}
               Ingrese nuevamente la contraseña
@@ -112,7 +113,7 @@ function RegisterScreen() {
             </label>
           </div>
 
-          <button type="button" onClick={handleSubmit}>
+          <button className='button' type="button" onClick={handleSubmit}>
             {" "}
             Registrar{" "}
           </button>
