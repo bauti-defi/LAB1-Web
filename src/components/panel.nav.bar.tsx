@@ -1,10 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./nav.bar.css";
 
-function HomeNavBar() {
+function PanelNavBar() {
   return (
-    <div>
+    <div className="nav-bar">
       <ul>
+        <li>
+          <Link to="/" id="home">
+            IngresoFácil
+          </Link>
+        </li>
         <li>
           <Link to="/lotes">Lotes</Link>
         </li>
@@ -16,4 +22,4 @@ function HomeNavBar() {
   );
 }
 
-export default HomeNavBar;
+export default PanelNavBar;
