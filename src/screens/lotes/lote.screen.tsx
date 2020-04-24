@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
+import { useCookies, withCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import Popup from "reactjs-popup";
 import { getAll } from "../../requests/lotes.requests";
@@ -13,6 +13,7 @@ function LoteScreen() {
   const [QR, setQR] = useState(null);
   const dispatch = useDispatch();
 
+  console.log("lotes");
   useEffect(() => {
     async function fetch() {
       return await getAll(cookie.session.token)
@@ -38,4 +39,4 @@ function LoteScreen() {
   );
 }
 
-export default LoteScreen;
+export default withCookies(LoteScreen);

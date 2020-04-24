@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useCookies } from "react-cookie";
+import { useCookies, withCookies } from "react-cookie";
 import { Redirect } from "react-router-dom";
 
 const axios = require("axios").default;
@@ -126,4 +126,4 @@ function isBlank(str) {
   return !str || /^\s*$/.test(str);
 }
 
-export default RegisterScreen;
+export default withCookies(RegisterScreen);
