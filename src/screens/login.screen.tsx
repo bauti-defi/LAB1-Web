@@ -20,7 +20,7 @@ function LoginScreen() {
         method: "post",
         url: "http://localhost:3500/auth/login",
         //Barrios use a random number instead of mac address bc there are no working packages for getting mac address
-        data: { email, password, mid: Math.random() },
+        data: { email, password, mid: Math.random(), type: "web" },
       })
         .then((response) => {
           if (response.data === "Invalid credentials.") {
