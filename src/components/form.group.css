@@ -1,0 +1,29 @@
+.form-group {
+    color: black;
+    font-size: 15px;
+}
+
+body {
+    background-color: #e7eaeb;
+}
+
+
+.label {
+    color: khaki;
+}
+.input {
+    color: khaki;
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 4px 8px;
+    text-align: center;
+    background:  #414B56;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    color:  #CBD1D4;
+}
