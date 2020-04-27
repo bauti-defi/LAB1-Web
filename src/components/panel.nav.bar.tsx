@@ -15,6 +15,9 @@ function PanelNavBar() {
           <Link to="/lotes">Lotes</Link>
         </li>
         <li>
+          <Link to='/trabajadores'>Trabajadores</Link>
+        </li>
+        <li>
           <Link to="/salir">Salir</Link>
         </li>
       </ul>

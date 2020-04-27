@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useCookies, withCookies } from "react-cookie";
 import { Redirect } from "react-router-dom";
-import '../styling/form.group.css'
+import '../components/form.group.css'
 
 const axios = require("axios").default;
 
