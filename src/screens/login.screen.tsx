@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useCookies, withCookies } from "react-cookie";
+import './login.screen.css'
 
 const axios = require("axios").default;
 
@@ -34,32 +35,27 @@ function LoginScreen() {
   }
 
   return (
-    <div
-      style={{
-        position: "absolute",
-        left: "50%",
-        top: "50%",
-      }}
-    >
-      <h3>Ingresar</h3>
+    <React.Fragment>
+    <div className = 'form'>
+      <h3 className="header">Ingresar</h3>
 
       <div className="form-group">
         <label>Email</label>
         <input
           type="email"
           name="email"
-          className="form-control"
+          className="form-group"
           placeholder="email"
           onChange={(event) => setEmail(event.target.value)}
         />
-      </div>
+    </div>
 
       <div className="form-group">
-        <label>Contraseña</label>
+        <label> Contraseña </label>
         <input
           type="password"
           name="password"
-          className="form-control"
+          className="form-group"
           placeholder="Contraseña"
           onChange={(event) => setPassword(event.target.value)}
         />
@@ -68,14 +64,15 @@ function LoginScreen() {
         <label>{message}</label>
       </div>
 
-      <button type="button" onClick={handleLogin}>
-        {" "}
+      <button type="button" className='button'onClick={handleLogin}>
         Ingresar{" "}
       </button>
-      <p className="registrar-usuario">
+      <p className="form-group">
         Aun no tiene un usuario? <a href="/register"> Registrarse</a>
       </p>
-    </div>
+    
+      </div>
+</React.Fragment>
   );
 }
 

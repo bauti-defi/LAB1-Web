@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useCookies, withCookies } from "react-cookie";
 import { Redirect } from "react-router-dom";
-import '../components/form.group.css'
+import './register.screen.css'
 
 const axios = require("axios").default;
 
@@ -44,44 +44,35 @@ function RegisterScreen() {
       {isRegistered || authenticated ? (
         <Redirect to="/login" />
       ) : (
-        <div  
-          style={{
-            position: "absolute",
-            left: "5%",
-            top: "10%",
-          }}
-        >
-          <h3>Registrarse</h3>
+    <div className='form'>
+          <h3 className='header'>Registrarse</h3>
           <label>{message}</label>
           <div className="form-group">
             <label>
-              {" "}
-              Ingrese el nombre de Barrio
+              Ingrese el nombre de Barrio</label>
               <input
                 type="text"
                 name="name"
                 autoCapitalize="words"
                 value={name}
                 onChange={(event) => setName(event.target.value)}
-                className="form-control"
-                placeholder=""
+                className="form-group"
+                placeholder="Ejemplo: La Delfina"
               />
-            </label>
           </div>
 
           <div className="form-group">
             <label>
-              {" "}
               Ingrese el correo electrónico del barrio
+            </label>
               <input
                 type="email"
                 name="email"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
-                className="form-control"
-                placeholder=""
+                className="form-group"
+                placeholder="ejemplo@ejemplo.com"
               />
-            </label>
           </div>
 
           <div className="form-group">
@@ -92,7 +83,7 @@ function RegisterScreen() {
                 name="password"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
-                className="form-control"
+                className="form-group"
                 placeholder=""
               />
             </label>
@@ -107,7 +98,7 @@ function RegisterScreen() {
                 name="confirm_password"
                 value={confirmPassword}
                 onChange={(event) => setConfirmPassword(event.target.value)}
-                className="form-control"
+                className="form-group"
                 placeholder=""
               />
             </label>
