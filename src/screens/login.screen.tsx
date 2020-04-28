@@ -68,7 +68,7 @@ function LoginScreen() {
         Ingresar{" "}
       </button>
       <p className="form-group">
-        Aun no tiene un usuario? <a href="/register"> Registrarse</a>
+        Aun no tiene un usuario? <a href="/registrar"> Registrarse</a>
       </p>
     
       </div>
