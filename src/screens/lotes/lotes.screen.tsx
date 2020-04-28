@@ -8,7 +8,7 @@ import LotesTable from "./lotes.table";
 
 var QRCode = require("qrcode.react");
 
-function LotesScreen() {
+function LoteScreen() {
   const [cookie] = useCookies();
   const [QR, setQR] = useState(null);
   const dispatch = useDispatch();
@@ -39,4 +39,4 @@ function LotesScreen() {
   );
 }
 
-export default withCookies(LotesScreen);
+export default withCookies(LoteScreen);

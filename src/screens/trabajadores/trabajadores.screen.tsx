@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import Popup from "reactjs-popup";
 import { getAll } from "../../requests/lotes.requests";
 import { Action } from "../../storage/dispatch.actions";
+import TrabajadoresTable  from './trabajadores.table';
 
 var QRCode = require("qrcode.react");
 
@@ -34,6 +35,7 @@ function TrabajadoresScreen() {
       <Popup open={!!QR} closeOnDocumentClick onClose={() => setQR(null)}>
         <QRCode value={QR} includeMargin={true} size={512} />
       </Popup>
+      <TrabajadoresTable onShowQR={setQR} />
     </React.Fragment>
   );
 }

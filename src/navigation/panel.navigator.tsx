@@ -14,7 +14,7 @@ function PanelNavigator() {
     return <Redirect to="/" />;
   }
 
-  return (
+return (
     <Switch>
       <Route path="/salir" component={LogOutScreen} />
       <Route path="/lotes" component={LoteScreen} />
