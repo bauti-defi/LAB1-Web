@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import { useCookies, withCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import {
-  createInvite,
   createLote,
   CreateLoteDTO,
   deleteLote,
+  getAssociationQR,
 } from "../../requests/lotes.requests";
 import { Action } from "../../storage/dispatch.actions";
 import { Lote, useLoteSelector } from "../../storage/lotes.reducer";
@@ -24,9 +24,10 @@ function LotesTable(props) {
       tooltip: "Asociar Propietario",
       onClick: async (event, rowData) => {
         setLoading(true);
-        await createInvite(rowData.id, cookie.session.token).then((response) =>
-          props.onShowQR(JSON.stringify(response.data))
-        );
+        await getAssociationQR(
+          rowData.id,
+          cookie.session.token
+        ).then((response) => props.onShowQR(JSON.stringify(response.data)));
         setLoading(false);
       },
     },
