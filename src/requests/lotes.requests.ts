@@ -3,7 +3,7 @@ const axios = require("axios").default;
 export const getAll = (token: string) =>
   axios({
     method: "get",
-    url: "http://localhost:3500/lote/barrio/all",
+    url: "http://localhost:3500/barrio/lotes/all",
     headers: {
       Authorization: token,
     },
