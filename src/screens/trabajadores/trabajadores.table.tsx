@@ -1,15 +1,7 @@
-
 import MaterialTable from "material-table";
 import React, { useState } from "react";
 import { useCookies, withCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
-import {
-  createInvite,
-  createLote,
-  CreateLoteDTO,
-  deleteLote,
-} from "../../requests/lotes.requests";
-import { Action } from "../../storage/dispatch.actions";
 import { Lote, useLoteSelector } from "../../storage/lotes.reducer";
 
 function TrabajadoresTable(props) {
@@ -28,18 +20,16 @@ function TrabajadoresTable(props) {
   return (
     <React.Fragment>
       <MaterialTable
-      options={{
-          headerStyle:{
-              backgroundColor: '#414B56'
+        options={{
+          headerStyle: {
+            backgroundColor: "#414B56",
           },
-          
-      }}
+        }}
         title="Lista de Trabajadores"
         isLoading={loading}
         columns={columns}
         data={lotes}
-        detailPanel={[
-        ]}
+        detailPanel={[]}
       />
     </React.Fragment>
   );

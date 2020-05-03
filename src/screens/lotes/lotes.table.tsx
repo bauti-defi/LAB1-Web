@@ -76,6 +76,7 @@ function LotesTable(props) {
     <React.Fragment>
       <MaterialTable
         title="Lista de Lotes"
+        options={{ pageSize: 10 }}
         editable={edit_actions}
         actions={actions}
         isLoading={loading}
