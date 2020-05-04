@@ -50,13 +50,6 @@ const columns = [
 const theme = createMuiTheme({
   typography: {
       fontSize: 18,
-    
-    // body1: {
-    //   fontWeight: 500,
-    // },
-    // button: {
-    //   fontStyle: 'italic',
-    // },
-  },
+  }
 });
 export default withCookies(TrabajadoresTable);

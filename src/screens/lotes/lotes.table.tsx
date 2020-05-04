@@ -11,7 +11,7 @@ import {
 import { Action } from "../../storage/dispatch.actions";
 import { Lote, useLoteSelector } from "../../storage/lotes.reducer";
 import PropietariosPanel from "./propietario.panel";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core";
+import { createMuiTheme, ThemeProvider, Paper } from "@material-ui/core";
 
 function LotesTable(props) {
   const [cookie] = useCookies();
@@ -86,8 +86,8 @@ function LotesTable(props) {
           },
         }}
         title="Lista de Lotes"
-        // editable={edit_actions}
-        // actions={actions}
+        editable={edit_actions}
+        actions={actions}
         isLoading={loading}
         columns={columns}
         data={lotes}
@@ -112,13 +112,6 @@ const columns = [
 const theme = createMuiTheme({
   typography: {
       fontSize: 18,
-    
-    // body1: {
-    //   fontWeight: 500,
-    // },
-    // button: {
-    //   fontStyle: 'italic',
-    // },
-  },
+  }
 });
 export default withCookies(LotesTable);
