@@ -12,6 +12,7 @@ import { Action } from "../../storage/dispatch.actions";
 import { Lote, useLoteSelector } from "../../storage/lotes.reducer";
 import PropietariosPanel from "./propietario.panel";
 import { createMuiTheme, ThemeProvider, Paper } from "@material-ui/core";
+import './lotes.table.css' 
 
 function LotesTable(props) {
   const [cookie] = useCookies();
