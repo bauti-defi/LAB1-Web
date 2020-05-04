@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useCookies, withCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import { Lote, useLoteSelector } from "../../storage/lotes.reducer";
+import { ThemeProvider, createMuiTheme, Typography } from "@material-ui/core";
 
 function TrabajadoresTable(props) {
   const [cookie] = useCookies();
@@ -19,10 +20,13 @@ function TrabajadoresTable(props) {
 
   return (
     <React.Fragment>
+      <ThemeProvider theme={theme}>
       <MaterialTable
         options={{
           headerStyle: {
-            backgroundColor: "#414B56",
+            backgroundColor: 	"#CBD1D4",
+            color: "#414B56",
+            fontSize: "14px"
           },
         }}
         title="Lista de Trabajadores"
@@ -31,6 +35,7 @@ function TrabajadoresTable(props) {
         data={lotes}
         detailPanel={[]}
       />
+      </ThemeProvider>
     </React.Fragment>
   );
 }
@@ -41,4 +46,17 @@ const columns = [
   { title: "Ocupación", field: "occupation" },
 ];
 
+
+const theme = createMuiTheme({
+  typography: {
+      fontSize: 18,
+    
+    // body1: {
+    //   fontWeight: 500,
+    // },
+    // button: {
+    //   fontStyle: 'italic',
+    // },
+  },
+});
 export default withCookies(TrabajadoresTable);

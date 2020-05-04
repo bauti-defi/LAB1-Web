@@ -11,6 +11,7 @@ import {
 import { Action } from "../../storage/dispatch.actions";
 import { Lote, useLoteSelector } from "../../storage/lotes.reducer";
 import PropietariosPanel from "./propietario.panel";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 
 function LotesTable(props) {
   const [cookie] = useCookies();
@@ -74,11 +75,19 @@ function LotesTable(props) {
 
   return (
     <React.Fragment>
+      <ThemeProvider theme={theme}>
+
       <MaterialTable
+        options={{
+          headerStyle: {
+            backgroundColor: 	"#CBD1D4",
+            color: "#414B56",
+            fontSize: "14px"
+          },
+        }}
         title="Lista de Lotes"
-        options={{ pageSize: 10 }}
-        editable={edit_actions}
-        actions={actions}
+        // editable={edit_actions}
+        // actions={actions}
         isLoading={loading}
         columns={columns}
         data={lotes}
@@ -88,6 +97,7 @@ function LotesTable(props) {
           },
         ]}
       />
+      </ThemeProvider>
     </React.Fragment>
   );
 }
@@ -99,4 +109,16 @@ const columns = [
   { title: "Codigo Postal", field: "code" },
 ];
 
+const theme = createMuiTheme({
+  typography: {
+      fontSize: 18,
+    
+    // body1: {
+    //   fontWeight: 500,
+    // },
+    // button: {
+    //   fontStyle: 'italic',
+    // },
+  },
+});
 export default withCookies(LotesTable);
