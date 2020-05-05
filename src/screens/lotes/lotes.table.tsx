@@ -1,3 +1,4 @@
+import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import MaterialTable from "material-table";
 import React, { useState } from "react";
 import { useCookies, withCookies } from "react-cookie";
@@ -10,9 +11,8 @@ import {
 } from "../../requests/lotes.requests";
 import { Action } from "../../storage/dispatch.actions";
 import { Lote, useLoteSelector } from "../../storage/lotes.reducer";
+import "./lotes.table.css";
 import PropietariosPanel from "./propietario.panel";
-import { createMuiTheme, ThemeProvider, Paper } from "@material-ui/core";
-import './lotes.table.css' 
 
 function LotesTable(props) {
   const [cookie] = useCookies();
@@ -29,7 +29,7 @@ function LotesTable(props) {
         getAssociationQR(rowData.id, cookie.session.token)
           .then((response) => response.data)
           .then((data) => {
-            data.path = "prop/to/lote";
+            data.path = "propietario/register";
             return data;
           })
           .then(JSON.stringify)
@@ -83,27 +83,26 @@ function LotesTable(props) {
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
-
-      <MaterialTable
-        options={{
-          headerStyle: {
-            backgroundColor: 	"#CBD1D4",
-            color: "#414B56",
-            fontSize: "14px"
-          },
-        }}
-        title="Lista de Lotes"
-        editable={edit_actions}
-        actions={actions}
-        isLoading={loading}
-        columns={columns}
-        data={lotes}
-        detailPanel={[
-          {
-            render: PropietariosPanel,
-          },
-        ]}
-      />
+        <MaterialTable
+          options={{
+            headerStyle: {
+              backgroundColor: "#CBD1D4",
+              color: "#414B56",
+              fontSize: "14px",
+            },
+          }}
+          title="Lista de Lotes"
+          editable={edit_actions}
+          actions={actions}
+          isLoading={loading}
+          columns={columns}
+          data={lotes}
+          detailPanel={[
+            {
+              render: PropietariosPanel,
+            },
+          ]}
+        />
       </ThemeProvider>
     </React.Fragment>
   );
@@ -118,7 +117,7 @@ const columns = [
 
 const theme = createMuiTheme({
   typography: {
-      fontSize: 18,
-  }
+    fontSize: 18,
+  },
 });
 export default withCookies(LotesTable);
