@@ -1,25 +1,19 @@
-    // TODO: Ask for endpoint
+// TODO: Ask for endpoint
 
 const axios = require("axios").default;
 
-export const getAll = (token: string) =>
+export const registerTrabajador = (data: TrabajadorRegistrationDTO) =>
   axios({
-    method: "get",
+    method: "post",
     url: "http://localhost:3500/trabajador/register",
-
-    headers: {
-      Authorization: token,
-    },
+    data,
   });
 
-export const deleteLote = (lote_id: string, token: string) =>
-  axios({
-    method: "delete",
-    // url: "http://localhost:3500/lote/delete",
-    params: {
-      lote: lote_id,
-    },
-    headers: {
-      Authorization: token,
-    },
-  });
+export type TrabajadorRegistrationDTO = {
+  email: string;
+  first_name: string;
+  last_name: string;
+  doc_id: string;
+  doc_type: number;
+  password: string; // Password as string?
+};
