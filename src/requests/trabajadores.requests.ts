@@ -2,24 +2,22 @@
 
 const axios = require("axios").default;
 
-export const getAll = (token: string) =>
+export const registerTrabajador = (data: TrabajadorRegistrationDTO, token: string) =>
   axios({
-    method: "get",
+    method: "post",
     url: "http://localhost:3500/trabajador/register",
-
+    data,
     headers: {
       Authorization: token,
     },
   });
 
-export const deleteLote = (lote_id: string, token: string) =>
-  axios({
-    method: "delete",
-    // url: "http://localhost:3500/lote/delete",
-    params: {
-      lote: lote_id,
-    },
-    headers: {
-      Authorization: token,
-    },
-  });
+export type TrabajadorRegistrationDTO = {
+  email: string;
+  first_name: string;
+  last_name: string;
+  doc_id: string;
+  doc_type: number;
+  password: string; // Password as string?
+  }
+
