@@ -24,11 +24,17 @@ function LotesTable(props) {
       tooltip: "Asociar Propietario",
       onClick: async (event, rowData) => {
         setLoading(true);
-        await getAssociationQR(
-          rowData.id,
-          cookie.session.token
-        ).then((response) => props.onShowQR(JSON.stringify(response.data)));
-        setLoading(false);
+        getAssociationQR(rowData.id, cookie.session.token)
+          .then((response) => response.data)
+          .then((data) => {
+            data.path = "prop/to/lote";
+            return data;
+          })
+          .then(JSON.stringify)
+          .then((qrData) => {
+            props.onShowQR(qrData);
+            setLoading(false);
+          });
       },
     },
   ];
