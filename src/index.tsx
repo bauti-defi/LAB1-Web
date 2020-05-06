@@ -8,11 +8,11 @@ import * as serviceWorker from "./serviceWorker";
 import store from "./storage/app.store";
 
 ReactDOM.render(
-  <CookiesProvider>
-    <Provider store={store}>
+  <Provider store={store}>
+    <CookiesProvider>
       <App />
-    </Provider>
-  </CookiesProvider>,
+    </CookiesProvider>
+  </Provider>,
   document.getElementById("root")
 );
 

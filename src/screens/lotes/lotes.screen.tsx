@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import Popup from "reactjs-popup";
 import { getAll } from "../../requests/lotes.requests";
 import { Action } from "../../storage/dispatch.actions";
+import { useRootSelector } from "../../storage/root.reducer";
 import LotesTable from "./lotes.table";
 
 var QRCode = require("qrcode.react");
@@ -11,18 +12,27 @@ var QRCode = require("qrcode.react");
 function LoteScreen() {
   const [cookie] = useCookies();
   const [QR, setQR] = useState(null);
+  const loading: boolean = useRootSelector(
+    (state) => state?.lote.loading || true
+  );
   const dispatch = useDispatch();
 
+  const setLotes = (relations) =>
+    dispatch({ type: Action.SAVE_LOTES, relations });
+
+  const setLoading = (loading: boolean) =>
+    dispatch({ type: Action.LOADING, loading });
+
   useEffect(() => {
-    async function fetch() {
-      return await getAll(cookie.session.token)
+    if (loading) {
+      getAll(cookie.session.token)
         .then((response) => {
-          dispatch({ type: Action.SAVE_LOTES, relations: response.data });
+          setLotes(response.data || []);
         })
         .catch((error) => console.error(error));
     }
-    fetch();
-  }, []);
+    setLoading(false);
+  }, [loading]);
 
   return (
     <React.Fragment>
