@@ -30,3 +30,5 @@ const guardiaReducer: Reducer = (state = initialState, action) => {
             return {...state, lotes: state.guardia}
     }
 }
+
+export default guardiaReducer

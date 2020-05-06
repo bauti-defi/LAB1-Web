@@ -12,6 +12,7 @@ import { useGuardiaSelector } from "../../storage/guardias.reducer";
 import { Guardia } from "../../storage/guardias.reducer";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core";
 import { Action } from "../../storage/dispatch.actions";
+import { findAllInRenderedTree } from "react-dom/test-utils";
 
 function GuardiasTable(props) {
   const [cookie] = useCookies();
@@ -19,63 +20,12 @@ function GuardiasTable(props) {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(!guardias);
 
-    // const edit_actions = {
-    // isEditable: (rowData) => false,
-    // isDeletable: (rowData) => false,
-    // onRowAdd: (newRow) => {
-    //   return new Promise((resolve, reject) => {
-    //     setTimeout(
-    //       () =>
-    //         addGuardia().then((response) => {
-    //           if (response.data) {
-    //               generateGuardiaQR()
-    //                   .then(JSON.stringify)
-    //                   .then((qrData) => {
-    //                       props.onShowQR(qrData);
-    //                       setLoading(false);
-    //                   })
-    //             dispatch({ type: Action.ADD_LOTE, lote: response.data });
-    //             resolve();
-    //           }
-    //           reject();
-    //         }),
-    //       3000
-    //     );
-    //   });
-    // },
-    // onRowDelete: (oldData) => {
-    //   return new Promise((resolve, reject) => {
-    //     setTimeout(() => {
-    //       addGuardia().then((response) => {
-    //         if (response) {
-    //           dispatch({ type: Action.REMOVE_LOTE, lote_id: oldData.id });
-    //           resolve();
-    //         }
-    //         // reject();
-    //       });
-    //     }, 3000);
-    //   });
-    // },
-    // }
-
   const actions = [
     {
-      icon: "important_devices",
+      icon: "add",
       tooltip: "Agregar guardia",
-      onClick: async (event, rowData) => {
-        setLoading(true);
-        generateGuardiaQR()
-          .then((response) => response.data)
-          .then((data) => {
-            data.path = "guardia/to/barrio";
-            return data;
-          })
-          .then(JSON.stringify)
-          .then((qrData) => {
-            props.onShowQR(qrData);
-            setLoading(false);
-          });
-      },
+      isFreeAction: true,
+      onClick: (event) => alert("OK") 
     },
   ];
 
@@ -93,9 +43,9 @@ function GuardiasTable(props) {
           }}
           title="Lista de Guardias"
           actions={actions}
-        //   editable={edit_actions}
           columns={columns}
           data={guardias}
+
         />
       </ThemeProvider>
     </React.Fragment>
