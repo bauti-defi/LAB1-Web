@@ -25,7 +25,9 @@ function GuardiasTable(props) {
       icon: "add",
       tooltip: "Agregar guardia",
       isFreeAction: true,
-      onClick: (event) => alert("OK") 
+      onClick: (event) => {
+        generateGuardiaQR(cookie.session.token);
+      } 
     },
   ];
 

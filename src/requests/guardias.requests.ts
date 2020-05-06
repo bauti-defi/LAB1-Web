@@ -18,7 +18,7 @@ export const deleteGuardia = (guardia_id) =>
     });
 
 // Generar QR para asociar guardia
-export const generateGuardiaQR = () =>
+export const generateGuardiaQR = (token: string) =>
     axios({
         method: 'post',
         url: 'http://localhost:3500/message/guardia/to/barrio',
