@@ -1,6 +1,6 @@
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import MaterialTable from "material-table";
-import React, { useState } from "react";
+import React from "react";
 import { useCookies, withCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import {
@@ -16,15 +16,18 @@ import PropietariosPanel from "./propietario.panel";
 
 function LotesTable(props) {
   const [cookie] = useCookies();
-  const lotes: Lote[] = useLoteSelector((state) => state.lote.lotes);
+  const lotes: Lote[] = useLoteSelector((state) => state?.lotes);
+  const loading: boolean = useLoteSelector((state) => state?.loading);
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(!lotes);
+
+  const setLoading = (loading: boolean) =>
+    dispatch({ type: Action.LOADING, loading });
 
   const actions = [
     {
       icon: "important_devices",
       tooltip: "Asociar Propietario",
-      onClick: async (event, rowData) => {
+      onClick: (event, rowData) => {
         setLoading(true);
         getAssociationQR(rowData.id, cookie.session.token)
           .then((response) => response.data)
