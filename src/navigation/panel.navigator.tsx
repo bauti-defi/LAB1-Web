@@ -3,7 +3,7 @@ import { useCookies, withCookies } from "react-cookie";
 import { Redirect, Route, Switch } from "react-router-dom";
 import LogOutScreen from "../screens/logout.screen";
 import LoteScreen from "../screens/lotes/lotes.screen";
-import trabajadoresScreen from "../screens/trabajadores/trabajadores.screen";
+import GuardiaScreen from '../screens/guardias/guardias.screen'
 
 function PanelNavigator() {
   const [cookie] = useCookies();
@@ -18,7 +18,8 @@ return (
     <Switch>
       <Route path="/salir" component={LogOutScreen} />
       <Route path="/lotes" component={LoteScreen} />
-      <Route path="/trabajadores" component={trabajadoresScreen} />
+      {/* <Route path="/trabajadores" component={trabajadoresScreen} /> */}
+      <Route path="/guardias" component={GuardiaScreen} />
       <Route>
         <Redirect to="/lotes" />
       </Route>

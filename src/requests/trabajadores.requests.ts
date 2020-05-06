@@ -5,9 +5,10 @@ const axios = require("axios").default;
 export const registerTrabajador = (data: TrabajadorRegistrationDTO) =>
   axios({
     method: "post",
-    url: "http://localhost:3500/trabajador/register",
+    // url: "http://localhost:3500/trabajador/register",
     data,
   });
+
 
 export type TrabajadorRegistrationDTO = {
   email: string;
@@ -15,5 +16,4 @@ export type TrabajadorRegistrationDTO = {
   last_name: string;
   doc_id: string;
   doc_type: number;
-  password: string; // Password as string?
-};
+  password: string; };

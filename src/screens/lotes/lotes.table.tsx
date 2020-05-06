@@ -11,12 +11,12 @@ import {
 import { Action } from "../../storage/dispatch.actions";
 import { Lote, useLoteSelector } from "../../storage/lotes.reducer";
 import PropietariosPanel from "./propietario.panel";
-import { createMuiTheme, ThemeProvider, Paper } from "@material-ui/core";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import './lotes.table.css' 
 
 function LotesTable(props) {
   const [cookie] = useCookies();
-  const lotes: Lote[] = useLoteSelector((state) => state.lote.lotes);
+  const lotes: Lote[] = useLoteSelector((state) => state.lotes);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(!lotes);
 
@@ -85,6 +85,7 @@ function LotesTable(props) {
       <ThemeProvider theme={theme}>
 
       <MaterialTable
+
         options={{
           headerStyle: {
             backgroundColor: 	"#CBD1D4",
@@ -92,12 +93,23 @@ function LotesTable(props) {
             fontSize: "14px"
           },
         }}
+
         title="Lista de Lotes"
         editable={edit_actions}
         actions={actions}
         isLoading={loading}
         columns={columns}
         data={lotes}
+
+        localization={{
+          header: {
+            actions: '  Acciones'
+          },
+            body: {
+              addTooltip: "Agregar Lote",
+            }
+          }
+          }
         detailPanel={[
           {
             render: PropietariosPanel,

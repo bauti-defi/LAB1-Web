@@ -14,7 +14,6 @@ function TrabajadoresScreen() {
   const [QR, setQR] = useState(null);
   const dispatch = useDispatch();
 
-  console.log("lotes");
   useEffect(() => {
     async function fetch() {
       return await getAll(cookie.session.token)
