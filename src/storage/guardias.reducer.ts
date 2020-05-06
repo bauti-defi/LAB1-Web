@@ -15,9 +15,11 @@ export type Guardia = {
 
 export interface GuardiaState {
     guardias: Guardia[];
+    loading: boolean;
 }
 const initialState: GuardiaState = {
     guardias: [],
+    loading: true,
 }
 
 export const useGuardiaSelector: TypedUseSelectorHook<GuardiaState> = useSelector;
@@ -27,7 +29,9 @@ const guardiaReducer: Reducer = (state = initialState, action) => {
         case Action.ADD_GUARDIA:
             return { ...state, guardias: [...state, action.guardia]}
         case Action.REMOVE_GUARDIA:
-            return {...state, lotes: state.guardia}
+            return {...state, guardia: state.guardia}
+        default:
+            return state;
     }
 }
 

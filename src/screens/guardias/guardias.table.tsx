@@ -13,23 +13,27 @@ import { Guardia } from "../../storage/guardias.reducer";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core";
 import { Action } from "../../storage/dispatch.actions";
 import { findAllInRenderedTree } from "react-dom/test-utils";
+import { useLoteSelector } from "../../storage/lotes.reducer";
 
 function GuardiasTable(props) {
   const [cookie] = useCookies();
-  const guardias: Guardia[] = useGuardiaSelector((state) => state.guardias);
+  const guardias: Guardia[] = useGuardiaSelector((state) => state?.guardias);
+  const loading: boolean = useLoteSelector((state) => state?.loading);
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(!guardias);
 
-  const actions = [
-    {
-      icon: "add",
-      tooltip: "Agregar guardia",
-      isFreeAction: true,
-      onClick: (event) => {
-        generateGuardiaQR(cookie.session.token);
-      } 
-    },
-  ];
+  const setLoading = (loading: boolean) =>
+    dispatch({ type: Action.LOADING, loading });
+
+  // const actions = [
+  //   {
+  //     icon: "add",
+  //     tooltip: "Agregar guardia",
+  //     isFreeAction: true,
+  //     onClick: (event) => {
+  //       generateGuardiaQR(cookie.session.token);
+  //     } 
+  //   },
+  // ];
 
 
   return (
@@ -44,7 +48,7 @@ function GuardiasTable(props) {
             },
           }}
           title="Lista de Guardias"
-          actions={actions}
+          // actions={actions}
           columns={columns}
           data={guardias}
 
