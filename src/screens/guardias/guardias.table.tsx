@@ -1,24 +1,14 @@
+import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import MaterialTable from "material-table";
-import React, { useState } from "react";
+import React from "react";
 import { useCookies, withCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
-
-import {
-  addGuardia,
-  generateGuardiaQR,
-  GuardiaDTO,
-} from "../../requests/guardias.requests";
-import { useGuardiaSelector } from "../../storage/guardias.reducer";
-import { Guardia } from "../../storage/guardias.reducer";
-import { ThemeProvider, createMuiTheme } from "@material-ui/core";
 import { Action } from "../../storage/dispatch.actions";
-import { findAllInRenderedTree } from "react-dom/test-utils";
-import { useLoteSelector } from "../../storage/lotes.reducer";
+import { Guardia, useGuardiaSelector } from "../../storage/guardias.reducer";
 
 function GuardiasTable(props) {
   const [cookie] = useCookies();
   const guardias: Guardia[] = useGuardiaSelector((state) => state?.guardias);
-  const loading: boolean = useLoteSelector((state) => state?.loading);
   const dispatch = useDispatch();
 
   const setLoading = (loading: boolean) =>
@@ -31,10 +21,9 @@ function GuardiasTable(props) {
   //     isFreeAction: true,
   //     onClick: (event) => {
   //       generateGuardiaQR(cookie.session.token);
-  //     } 
+  //     }
   //   },
   // ];
-
 
   return (
     <React.Fragment>
@@ -51,7 +40,6 @@ function GuardiasTable(props) {
           // actions={actions}
           columns={columns}
           data={guardias}
-
         />
       </ThemeProvider>
     </React.Fragment>
@@ -64,11 +52,10 @@ const theme = createMuiTheme({
 });
 
 const columns = [
-    { title: "Apellido", field: 'last_name' },
-    { title: "Nombre", field: 'first_name' },
-    { title: "Rango", field: 'rank' },
-    { title: "Fecha de Ingreso", field: 'since' }
-
+  { title: "Apellido", field: "last_name" },
+  { title: "Nombre", field: "first_name" },
+  { title: "Rango", field: "rank" },
+  { title: "Fecha de Ingreso", field: "since" },
 ];
 
-export default withCookies(GuardiasTable)
+export default withCookies(GuardiasTable);

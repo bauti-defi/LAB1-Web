@@ -1,24 +1,33 @@
-import React, { useEffect, useState } from "react";
-import GuardiasTable from "./guardias.table";
-import { withCookies, useCookies } from "react-cookie";
-import { generateGuardiaQR } from "../../requests/guardias.requests";
+import { Button } from "@material-ui/core";
+import React, { useState } from "react";
+import { useCookies, withCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import Popup from "reactjs-popup";
-import { Button } from "@material-ui/core";
-import { useRootSelector } from "../../storage/root.reducer";
 import { Action } from "../../storage/dispatch.actions";
-import '../guardias/guardias.screen.css'
+import { useRootSelector } from "../../storage/root.reducer";
+import "../guardias/guardias.screen.css";
+import GuardiasTable from "./guardias.table";
 var QRCode = require("qrcode.react");
-
 
 function GuardiaQR() {
   return (
-    <Popup 
-     position='top center' 
+    <Popup
+      position="top center"
       trigger={
-      <Button variant="contained" color="inherit" component="span"
-        size='large'> Mostrar Código QR de asociación a barrio</Button>} modal>
-      <QRCode value='http://localhost:3500/message/guardia/to/barrio'
+        <Button
+          variant="contained"
+          color="inherit"
+          component="span"
+          size="large"
+        >
+          {" "}
+          Mostrar Código QR de asociación a barrio
+        </Button>
+      }
+      modal
+    >
+      <QRCode
+        value="http://localhost:3500/message/guardia/to/barrio"
         includeMargin={true}
         size={420}
       />
@@ -44,7 +53,7 @@ function GuardiaScreen() {
         href="https://fonts.googleapis.com/icon?family=Material+Icons"
       />
       <GuardiaQR />
-      <GuardiasTable/>
+      <GuardiasTable />
     </React.Fragment>
   );
 }
