@@ -4,7 +4,6 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import GuardiaScreen from "../screens/guardias/guardias.screen";
 import LogOutScreen from "../screens/logout.screen";
 import LoteScreen from "../screens/lotes/lotes.screen";
-import QRInviteScreen from "../screens/qr.invite.screen";
 
 function PanelNavigator() {
   const [cookie] = useCookies();
@@ -17,7 +16,6 @@ function PanelNavigator() {
 
   return (
     <Switch>
-      <Route path="/qr/:id/:message" component={QRInviteScreen} />
       <Route path="/salir" component={LogOutScreen} />
       <Route path="/lotes" component={LoteScreen} />
       {/* <Route path="/trabajadores" component={trabajadoresScreen} /> */}
