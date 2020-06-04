@@ -1,5 +1,6 @@
+import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import MaterialTable from "material-table";
-import React, { useState } from "react";
+import React from "react";
 import { useCookies, withCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import {
@@ -10,25 +11,35 @@ import {
 } from "../../requests/lotes.requests";
 import { Action } from "../../storage/dispatch.actions";
 import { Lote, useLoteSelector } from "../../storage/lotes.reducer";
+import "./lotes.table.css";
 import PropietariosPanel from "./propietario.panel";
 
 function LotesTable(props) {
   const [cookie] = useCookies();
-  const lotes: Lote[] = useLoteSelector((state) => state.lote.lotes);
+  const lotes: Lote[] = useLoteSelector((state) => state?.lotes);
+  const loading: boolean = useLoteSelector((state) => state?.loading);
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(!lotes);
+
+  const setLoading = (loading: boolean) =>
+    dispatch({ type: Action.LOADING, loading });
 
   const actions = [
     {
       icon: "important_devices",
       tooltip: "Asociar Propietario",
-      onClick: async (event, rowData) => {
+      onClick: (event, rowData) => {
         setLoading(true);
-        await getAssociationQR(
-          rowData.id,
-          cookie.session.token
-        ).then((response) => props.onShowQR(JSON.stringify(response.data)));
-        setLoading(false);
+        getAssociationQR(rowData.id, cookie.session.token)
+          .then((response) => response.data)
+          .then((data) => {
+            data.path = "propietario/register";
+            return data;
+          })
+          .then(JSON.stringify)
+          .then((qrData) => {
+            props.onShowQR(qrData);
+            setLoading(false);
+          });
       },
     },
   ];
@@ -74,19 +85,36 @@ function LotesTable(props) {
 
   return (
     <React.Fragment>
-      <MaterialTable
-        title="Lista de Lotes"
-        editable={edit_actions}
-        actions={actions}
-        isLoading={loading}
-        columns={columns}
-        data={lotes}
-        detailPanel={[
-          {
-            render: PropietariosPanel,
-          },
-        ]}
-      />
+      <ThemeProvider theme={theme}>
+        <MaterialTable
+          options={{
+            headerStyle: {
+              backgroundColor: "#CBD1D4",
+              color: "#414B56",
+              fontSize: "14px",
+            },
+          }}
+          title="Lista de Lotes"
+          editable={edit_actions}
+          actions={actions}
+          isLoading={loading}
+          columns={columns}
+          data={lotes}
+          localization={{
+            header: {
+              actions: "  Acciones",
+            },
+            body: {
+              addTooltip: "Agregar Lote",
+            },
+          }}
+          detailPanel={[
+            {
+              render: PropietariosPanel,
+            },
+          ]}
+        />
+      </ThemeProvider>
     </React.Fragment>
   );
 }
@@ -98,4 +126,9 @@ const columns = [
   { title: "Codigo Postal", field: "code" },
 ];
 
+const theme = createMuiTheme({
+  typography: {
+    fontSize: 18,
+  },
+});
 export default withCookies(LotesTable);

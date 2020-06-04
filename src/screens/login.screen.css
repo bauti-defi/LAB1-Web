@@ -1,0 +1,47 @@
+a {
+  color: 	#00526b;
+  
+}
+.header{
+    padding-top: 40px;
+    padding-bottom: 20px;
+    font-size: 40px;
+    font: black;
+}
+
+.form-group, button {
+    position: relative;
+    width: 200px;
+    font-size: 15px;
+    /* height: 200px; */
+}
+
+/* Background image  */
+
+ .button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.form {
+    position: relative;
+  }
+  .form::before {
+    content: "";
+    position: absolute;
+    top: -3px; left: -100px;
+    width: 200%; height: 120%;
+    background-image: url(https://www.buscobarrioprivado.com/template/bbp/img/slide02.jpg);
+    filter: grayscale(100%);
+    opacity: 0.4;
+  }
+  .module-inside {
+    /* This will make it stack on top of the ::before */
+    position: relative;
+  }

@@ -8,7 +8,7 @@ function LoginNavBar() {
       <ul>
         <li>
           <Link to="/" id="home">
-            IngresoFácil
+            <b>IngresoFácil</b>
           </Link>
         </li>
         <li>

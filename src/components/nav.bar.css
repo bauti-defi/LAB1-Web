@@ -1,3 +1,4 @@
+
 .nav-bar {
   position: fixed;
   background-color: grey;
@@ -36,6 +37,7 @@ ul {
 li a {
   text-decoration: none;
   color: #cbd1d4;
+  color: #cbd1d4;
   display: block;
   padding: 8px 16px;
   text-align: center;
@@ -45,6 +47,4 @@ li a:hover {
   text-decoration: none;
   background-color: #627182;
 }
-li .active {
-  background-color: hotpink;
-}
+

@@ -1,14 +1,15 @@
+
 import React, { useEffect, useState } from "react";
 import { useCookies, withCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import Popup from "reactjs-popup";
 import { getAll } from "../../requests/lotes.requests";
 import { Action } from "../../storage/dispatch.actions";
-import LotesTable from "./lotes.table";
+import TrabajadoresTable  from './trabajadores.table';
 
 var QRCode = require("qrcode.react");
 
-function LoteScreen() {
+function TrabajadoresScreen() {
   const [cookie] = useCookies();
   const [QR, setQR] = useState(null);
   const dispatch = useDispatch();
@@ -33,9 +34,9 @@ function LoteScreen() {
       <Popup open={!!QR} closeOnDocumentClick onClose={() => setQR(null)}>
         <QRCode value={QR} includeMargin={true} size={512} />
       </Popup>
-      <LotesTable onShowQR={setQR} />
+      <TrabajadoresTable onShowQR={setQR} />
     </React.Fragment>
   );
 }
 
-export default withCookies(LoteScreen);
+export default withCookies(TrabajadoresScreen);
