@@ -1,4 +1,4 @@
-import { createMuiTheme } from "@material-ui/core";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import MaterialTable from "material-table";
 import React from "react";
 import { useCookies, withCookies } from "react-cookie";
@@ -43,6 +43,7 @@ const PropietariosTable = (props) => {
   };
   return (
     <React.Fragment>
+      <ThemeProvider theme={theme}>
       <MaterialTable
         options={{
           headerStyle: {
@@ -62,6 +63,7 @@ const PropietariosTable = (props) => {
           },
         }}
       />
+     </ThemeProvider>
     </React.Fragment>
   );
 };

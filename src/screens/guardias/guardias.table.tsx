@@ -5,26 +5,39 @@ import { useCookies, withCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import { Action } from "../../storage/dispatch.actions";
 import { Guardia, useGuardiaSelector } from "../../storage/guardias.reducer";
+import { disableGuardia } from "../../requests/guardias.requests";
 
 function GuardiasTable(props) {
   const [cookie] = useCookies();
   const guardias: Guardia[] = useGuardiaSelector((state) => state?.guardias);
   const dispatch = useDispatch();
 
-  const setLoading = (loading: boolean) =>
-    dispatch({ type: Action.LOADING_GUARDIA, loading });
+  const loading: boolean = useGuardiaSelector((state) => state?.loading);
 
-  // const actions = [
-  //   {
-  //     icon: "add",
-  //     tooltip: "Agregar guardia",
-  //     isFreeAction: true,
-  //     onClick: (event) => {
-  //       generateGuardiaQR(cookie.session.token);
-  //     }
-  //   },
-  // ];
-
+  const edit_actions = {
+    isEditable: (rowData) => false,
+    isDeletable: (rowData) => true,
+    onRowDelete: (oldData) => {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          disableGuardia(
+            oldData.id,
+            oldData.dev_id,
+            cookie.session.token
+          ).then((response) => {
+            if (response) {
+              dispatch({
+                type: Action.REMOVE_GUARDIA,
+                guardia_id: oldData.id,
+              });
+              resolve();
+            }
+            reject();
+          });
+        }, 3000);
+      })
+    }
+  }
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
@@ -37,9 +50,15 @@ function GuardiasTable(props) {
             },
           }}
           title="Lista de Guardias"
-          // actions={actions}
+          editable={edit_actions}
+          isLoading={loading}
           columns={columns}
           data={guardias}
+          localization={{
+            header: {
+              actions: " Acciones",
+            },
+          }}
         />
       </ThemeProvider>
     </React.Fragment>

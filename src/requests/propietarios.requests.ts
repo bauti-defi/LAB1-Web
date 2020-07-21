@@ -32,3 +32,12 @@ export const disablePropietario = (
       Authorization: token,
     },
   });
+
+export const getAssociationQR = (token: string) =>
+  axios({
+    method: "post",
+    url: "http://localhost:3500/message/prop/to/lote",
+    headers: {
+      Authorization: token,
+    },
+  });

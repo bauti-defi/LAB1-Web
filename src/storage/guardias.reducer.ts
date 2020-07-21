@@ -27,9 +27,18 @@ export const useGuardiaSelector: TypedUseSelectorHook<GuardiaState> = useSelecto
 const guardiaReducer: Reducer = (state = initialState, action) => {
   switch (action.type) {
     case Action.ADD_GUARDIA:
-      return { ...state, guardias: [...state, action.guardia] };
+      return { ...state, guardias: [...state.guardia, action.guardia] };
     case Action.REMOVE_GUARDIA:
-      return { ...state, guardia: state.guardia };
+      return {
+        ...state,
+        guardia: state.guardia.filter(
+          (prop) => prop.id != state.guardia.id
+        ),
+      };
+    case Action.SAVE_GUARDIAS:
+      return { ...state, guardias: action.guardias, loading: false };
+    case Action.LOADING_GUARDIAS:
+      return { ...state, loading: action.loading};
     default:
       return state;
   }
