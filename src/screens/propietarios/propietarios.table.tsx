@@ -4,11 +4,9 @@ import React from "react";
 import { useCookies, withCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import { disablePropietario } from "../../requests/propietarios.requests";
+import { usePropietarioSelector } from "../../storage/app.selectors";
 import { Action } from "../../storage/dispatch.actions";
-import {
-  Propietario,
-  usePropietarioSelector,
-} from "../../storage/propietarios.reducer";
+import { Propietario } from "../../storage/propietarios.reducer";
 
 const PropietariosTable = (props) => {
   const [cookie] = useCookies();

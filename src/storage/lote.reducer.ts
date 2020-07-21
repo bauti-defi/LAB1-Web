@@ -1,7 +1,5 @@
-import { TypedUseSelectorHook } from "react-redux";
 import { Reducer } from "redux";
 import { Action } from "./dispatch.actions";
-import { useRootSelector } from "./root.reducer";
 
 export type Lote = {
   id: string;
@@ -20,9 +18,6 @@ const initialState: LoteState = {
   lotes: [],
   loading: true,
 };
-
-export const useLoteSelector: TypedUseSelectorHook<LoteState> = (selector) =>
-  useRootSelector((state) => selector(state.lote));
 
 const loteReducer: Reducer = (state = initialState, action) => {
   switch (action.type) {

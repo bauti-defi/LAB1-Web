@@ -3,8 +3,8 @@ import { useCookies, withCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import Popup from "reactjs-popup";
 import { getAll } from "../../requests/lotes.requests";
+import { useLoteSelector } from "../../storage/app.selectors";
 import { Action } from "../../storage/dispatch.actions";
-import { useLoteSelector } from "../../storage/lotes.reducer";
 import LotesTable from "./lotes.table";
 
 var QRCode = require("qrcode.react");

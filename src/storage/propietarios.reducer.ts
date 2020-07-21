@@ -1,7 +1,5 @@
-import { TypedUseSelectorHook } from "react-redux";
 import { Reducer } from "redux";
 import { Action } from "./dispatch.actions";
-import { useRootSelector } from "./root.reducer";
 
 export type Propietario = {
   lote_id: string;
@@ -22,10 +20,6 @@ const initialState: PropietarioState = {
   propietarios: [],
   loading: true,
 };
-
-export const usePropietarioSelector: TypedUseSelectorHook<PropietarioState> = (
-  selector
-) => useRootSelector((state) => selector(state.propietario));
 
 const propietarioReducer: Reducer = (state = initialState, action) => {
   switch (action.type) {
