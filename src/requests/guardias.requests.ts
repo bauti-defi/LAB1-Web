@@ -27,6 +27,12 @@ export const getAssociationQR = (token: string) =>
     },
   });
 
+export const getAllGuardias = (token: string) =>
+  axios({
+    method: "post",
+    url: "http:/barrio/guardias/all",
+  })
+
 // Información de un guardia
 export type GuardiaDTO = {
   g_id: string;
