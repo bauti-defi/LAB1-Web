@@ -29,12 +29,6 @@ function GuardiaScreen() {
         rel="stylesheet"
         href="https://fonts.googleapis.com/icon?family=Material+Icons"
       />
-<button type="button" onClick={handleAssociation}>
-        Asociar Guardia
-      </button>
-      <Popup open={!!QR} closeOnDocumentClick onClose={() => setQR(null)}>
-        <QRCode value={QR} includeMargin={true} size={512} />
-      </Popup>
       <Popup
         trigger={
           <button className="button" >
@@ -51,14 +45,19 @@ function GuardiaScreen() {
             <div className="header"> Asociación de Guardia </div>
             <div className="content">
               {" "}
-              Escanee el código QR mostrado para asociar un guardia al barrio.
+              Para asociar un guardia, dele click al botón que se encuentra abajo.
+              Se abrirá un código QR, el cual debe ser escaneado por el guardia.
+              Una vez escaneado, haga click en cualquier parte para volver a este menú.
             </div>
             <div id='outPopUp'>
 
-              <QRCode value= {QR}
-                size='256'
-              
-              />
+<button type="button" className="button" onClick={handleAssociation}>
+        Asociar Guardia
+      </button>
+      <Popup open={!!QR} closeOnDocumentClick onClose={() => setQR(null)}>
+                <QRCode value={QR}
+                  includeMargin={true} size={512} />
+      </Popup>
             </div>
           </div>
         )}
