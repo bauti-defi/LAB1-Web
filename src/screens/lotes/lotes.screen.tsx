@@ -12,7 +12,7 @@ var QRCode = require("qrcode.react");
 function LoteScreen() {
   const [cookie] = useCookies();
   const [QR, setQR] = useState(null);
-  const loading: boolean = useLoteSelector((state) => state?.loading || true);
+  const loading: boolean = useLoteSelector((state) => state?.loading);
   const dispatch = useDispatch();
 
   const setLoading = (loading: boolean) =>
