@@ -4,8 +4,6 @@ import Popup from "reactjs-popup";
 import { getAssociationQR } from "../../requests/guardias.requests";
 import "../guardias/guardias.screen.css";
 import GuardiasTable from "../guardias/guardias.table";
-import lotesTable from "../lotes/lotes.table";
-import guardiasTable from "./guardias.table";
 var QRCode = require("qrcode.react");
 
 function GuardiaScreen() {
@@ -30,11 +28,7 @@ function GuardiaScreen() {
         href="https://fonts.googleapis.com/icon?family=Material+Icons"
       />
       <Popup
-        trigger={
-          <button className="button" >
-            Asociar Guardia
-          </button>
-        }
+        trigger={<button className="button">Asociar Guardia</button>}
         modal
       >
         {(close) => (
@@ -49,6 +43,7 @@ function GuardiaScreen() {
               Se abrirá un código QR, el cual debe ser escaneado por el guardia.
               Una vez escaneado, haga click en cualquier parte para volver a este menú.
             </div>
+
             <div id='outPopUp'>
 
 <button type="button" className="button" onClick={handleAssociation}>

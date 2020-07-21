@@ -12,7 +12,7 @@ function GuardiasTable(props) {
   const dispatch = useDispatch();
 
   const setLoading = (loading: boolean) =>
-    dispatch({ type: Action.LOADING, loading });
+    dispatch({ type: Action.LOADING_GUARDIA, loading });
 
   // const actions = [
   //   {

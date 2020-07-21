@@ -1,14 +1,15 @@
-import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { Reducer } from "redux";
 import { Action } from "./dispatch.actions";
 
 export type Propietario = {
-    lote_id: string;
-    user_id: string;
-    device_id: string;
-    nickname: string;
-    enabled: boolean;
-    creation_date: Date;
+  lote_id: string;
+  last_name: string;
+  first_name: string;
+  doc_id: string;
+  dev_id: string;
+  email: string;
+  id: string;
+  since: Date;
 };
 
 export interface PropietarioState {
@@ -20,21 +21,27 @@ const initialState: PropietarioState = {
   loading: true,
 };
 
-export const usePropietarioSelector: TypedUseSelectorHook<PropietarioState> = useSelector;
-
-
 const propietarioReducer: Reducer = (state = initialState, action) => {
   switch (action.type) {
-      case Action.LOADING:
-          return {...state, loading: action.loading}
+    case Action.LOADING_PROPIETARIOS:
+      return { ...state, loading: action.loading };
     case Action.ADD_PROPIETARIO:
-      return { ...state, propietarios: [...state, action.propietario] };
+      return {
+        ...state,
+        propietarios: [...state.propietarios, action.propietario],
+      };
     case Action.REMOVE_PROPIETARIO:
-      return { ...state, propietario: state.propietario };
+      return {
+        ...state,
+        propietarios: state.propietarios.filter(
+          (prop) => prop.id != state.propietario.id
+        ),
+      };
+    case Action.SAVE_PROPIETARIOS:
+      return { ...state, propietarios: action.propietarios, loading: false };
     default:
       return state;
   }
 };
 
 export default propietarioReducer;
-

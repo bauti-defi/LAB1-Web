@@ -4,7 +4,6 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import GuardiaScreen from "../screens/guardias/guardias.screen";
 import LogOutScreen from "../screens/logout.screen";
 import LoteScreen from "../screens/lotes/lotes.screen";
-import trabajadoresScreen from "../screens/trabajadores/trabajadores.screen";
 import propietariosScreen from "../screens/propietarios/propietarios.screen";
 
 function PanelNavigator() {
@@ -22,7 +21,7 @@ function PanelNavigator() {
       <Route path="/lotes" component={LoteScreen} />
       {/* <Route path="/trabajadores" component={trabajadoresScreen} /> */}
       <Route path="/guardias" component={GuardiaScreen} />
-      <Route path="/propietarios" component={propietariosScreen}/>
+      <Route path="/propietarios" component={propietariosScreen} />
       <Route>
         <Redirect to="/lotes" />
       </Route>
