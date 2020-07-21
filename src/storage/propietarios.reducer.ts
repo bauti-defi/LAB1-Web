@@ -34,7 +34,7 @@ const propietarioReducer: Reducer = (state = initialState, action) => {
       return {
         ...state,
         propietarios: state.propietarios.filter(
-          (prop) => prop.id != state.propietario.id
+          (prop) => prop.id != state.propietario_id
         ),
       };
     case Action.SAVE_PROPIETARIOS:
