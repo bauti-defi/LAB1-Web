@@ -6,15 +6,13 @@ import { useDispatch } from "react-redux";
 import {
   createLote,
   CreateLoteDTO,
-  deleteLote,
   getAssociationQR,
 } from "../../requests/lotes.requests";
 import { Action } from "../../storage/dispatch.actions";
 import { Lote, useLoteSelector } from "../../storage/lotes.reducer";
 import "./lotes.table.css";
-import PropietariosPanel from "../propietarios/propietarios.table";
 
-function LotesTable(props) {
+const LotesTable = (props) => {
   const [cookie] = useCookies();
   const lotes: Lote[] = useLoteSelector((state) => state?.lotes);
   const loading: boolean = useLoteSelector((state) => state?.loading);
@@ -46,7 +44,6 @@ function LotesTable(props) {
 
   const edit_actions = {
     isEditable: (rowData) => false,
-    isDeletable: (rowData) => true,
     onRowAdd: (newRow) => {
       const dto: CreateLoteDTO = {
         name: newRow.name,
@@ -66,19 +63,6 @@ function LotesTable(props) {
             }),
           3000
         );
-      });
-    },
-    onRowDelete: (oldData) => {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          deleteLote(oldData.id, cookie.session.token).then((response) => {
-            if (response) {
-              dispatch({ type: Action.REMOVE_LOTE, lote_id: oldData.id });
-              resolve();
-            }
-            reject();
-          });
-        }, 3000);
       });
     },
   };
@@ -112,7 +96,7 @@ function LotesTable(props) {
       </ThemeProvider>
     </React.Fragment>
   );
-}
+};
 
 const columns = [
   { title: "Nombre/Número", field: "name" },

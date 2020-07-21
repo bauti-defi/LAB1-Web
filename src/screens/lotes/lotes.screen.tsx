@@ -17,9 +17,6 @@ function LoteScreen() {
   );
   const dispatch = useDispatch();
 
-  const setLotes = (relations) =>
-    dispatch({ type: Action.SAVE_LOTES, relations });
-
   const setLoading = (loading: boolean) =>
     dispatch({ type: Action.LOADING, loading });
 
@@ -27,7 +24,7 @@ function LoteScreen() {
     if (loading) {
       getAll(cookie.session.token)
         .then((response) => {
-          setLotes(response.data || []);
+          dispatch({ type: Action.SAVE_LOTES, lotes: response.data || [] });
         })
         .catch((error) => console.error(error));
     }
