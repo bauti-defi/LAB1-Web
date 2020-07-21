@@ -3,16 +3,18 @@ import MaterialTable from "material-table";
 import React from "react";
 import { useCookies, withCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
-import { Action } from "../../storage/dispatch.actions";
-import { Guardia, useGuardiaSelector } from "../../storage/guardias.reducer";
 import { disableGuardia } from "../../requests/guardias.requests";
+import { useGuardiaSelector } from "../../storage/app.selectors";
+import { Action } from "../../storage/dispatch.actions";
+import { Guardia } from "../../storage/guardias.reducer";
 
-function GuardiasTable(props) {
+const GuardiasTable = () => {
   const [cookie] = useCookies();
   const guardias: Guardia[] = useGuardiaSelector((state) => state?.guardias);
   const dispatch = useDispatch();
 
   const loading: boolean = useGuardiaSelector((state) => state?.loading);
+  console.log(guardias);
 
   const edit_actions = {
     isEditable: (rowData) => false,
@@ -20,24 +22,22 @@ function GuardiasTable(props) {
     onRowDelete: (oldData) => {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
-          disableGuardia(
-            oldData.id,
-            oldData.dev_id,
-            cookie.session.token
-          ).then((response) => {
-            if (response) {
-              dispatch({
-                type: Action.REMOVE_GUARDIA,
-                guardia_id: oldData.id,
-              });
-              resolve();
+          disableGuardia(oldData.id, oldData.dev_id, cookie.session.token).then(
+            (response) => {
+              if (response.data) {
+                dispatch({
+                  type: Action.REMOVE_GUARDIA,
+                  guardia_id: oldData.id,
+                });
+                resolve();
+              }
+              reject();
             }
-            reject();
-          });
+          );
         }, 3000);
-      })
-    }
-  }
+      });
+    },
+  };
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
@@ -63,7 +63,7 @@ function GuardiasTable(props) {
       </ThemeProvider>
     </React.Fragment>
   );
-}
+};
 const theme = createMuiTheme({
   typography: {
     fontSize: 18,
