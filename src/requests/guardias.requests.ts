@@ -1,19 +1,17 @@
 const axios = require("axios").default;
 
-// Agregar guardia
-export const addGuardia = () =>
-  axios({
-    method: "post",
-    url: "http:/localhost:3500/guardia/register",
-  });
-
 // Eliminar guardia
-export const deleteGuardia = (guardia_id) =>
+export const disableGuardia = (
+  guardia_id: string,
+  guardia_dev_id: string,
+  token: string
+) =>
   axios({
-    method: "delete",
-    url: "http:/localhost:3500/guardia/delete",
-    params: {
-      guardia: guardia_id,
+    method: "put",
+    url: "http://localhost:3500/barrio/guardia/disable",
+    data: { guardia_id, guardia_dev_id },
+    headers: {
+      Authorization: token,
     },
   });
 
@@ -29,9 +27,12 @@ export const getAssociationQR = (token: string) =>
 
 export const getAllGuardias = (token: string) =>
   axios({
-    method: "post",
-    url: "http:/barrio/guardias/all",
-  })
+    method: "get",
+    url: "http://localhost:3500/barrio/guardias/all",
+    headers: {
+      Authorization: token,
+    },
+  });
 
 // Información de un guardia
 export type GuardiaDTO = {

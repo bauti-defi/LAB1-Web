@@ -1,16 +1,15 @@
-import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { Reducer } from "redux";
 import { Action } from "./dispatch.actions";
 
 export type Guardia = {
-  user_id: string;
+  id: string;
   rank: number;
   email: string;
-  fn: string;
-  ln: string;
+  first_name: string;
+  last_name: string;
+  dev_id: string;
   doc_id: string;
-  doc_type: number;
-  guardia_since: string;
+  since: string;
 };
 
 export interface GuardiaState {
@@ -22,14 +21,19 @@ const initialState: GuardiaState = {
   loading: true,
 };
 
-export const useGuardiaSelector: TypedUseSelectorHook<GuardiaState> = useSelector;
-
 const guardiaReducer: Reducer = (state = initialState, action) => {
   switch (action.type) {
     case Action.ADD_GUARDIA:
-      return { ...state, guardias: [...state, action.guardia] };
+      return { ...state, guardias: [...state.guardia, action.guardia] };
     case Action.REMOVE_GUARDIA:
-      return { ...state, guardia: state.guardia };
+      return {
+        ...state,
+        guardias: state.guardias.filter((g) => g.id != action.guardia_id),
+      };
+    case Action.SAVE_GUARDIAS:
+      return { ...state, guardias: action.guardias, loading: false };
+    case Action.LOADING_GUARDIAS:
+      return { ...state, loading: action.loading };
     default:
       return state;
   }

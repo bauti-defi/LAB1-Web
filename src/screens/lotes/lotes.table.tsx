@@ -12,6 +12,7 @@ import { useLoteSelector } from "../../storage/app.selectors";
 import { Action } from "../../storage/dispatch.actions";
 import { Lote } from "../../storage/lote.reducer";
 import "./lotes.table.css";
+import Popup from "reactjs-popup";
 
 const LotesTable = (props) => {
   const [cookie] = useCookies();
