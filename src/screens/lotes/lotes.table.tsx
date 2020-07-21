@@ -19,7 +19,7 @@ const LotesTable = (props) => {
   const dispatch = useDispatch();
 
   const setLoading = (loading: boolean) =>
-    dispatch({ type: Action.LOADING, loading });
+    dispatch({ type: Action.LOADING_LOTES, loading });
 
   const actions = [
     {

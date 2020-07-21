@@ -3,26 +3,18 @@ import MaterialTable from "material-table";
 import React from "react";
 import { useCookies, withCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
-import { deletePropietario } from "../../requests/propietarios.requests";
+import { disablePropietario } from "../../requests/propietarios.requests";
 import { Action } from "../../storage/dispatch.actions";
 import {
   Propietario,
   usePropietarioSelector,
 } from "../../storage/propietarios.reducer";
 
-function PropietariosPanel(rowData) {
-  return (
-    <div>
-      <h2>Propietarios: {rowData.propietarios?.length}</h2>
-    </div>
-  );
-}
-function PropietariosTable(props) {
+const PropietariosTable = (props) => {
   const [cookie] = useCookies();
   const propietarios: Propietario[] = usePropietarioSelector(
     (state) => state?.propietarios
   );
-
   const loading: boolean = usePropietarioSelector((state) => state?.loading);
   const dispatch = useDispatch();
 
@@ -32,18 +24,21 @@ function PropietariosTable(props) {
     onRowDelete: (oldData) => {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
-          deletePropietario(oldData.id, cookie.session.token).then(
-            (response) => {
-              if (response) {
-                dispatch({
-                  type: Action.REMOVE_PROPIETARIO,
-                  propietario_id: oldData.id,
-                });
-                resolve();
-              }
-              reject();
+          disablePropietario(
+            oldData.id,
+            oldData.dev_id,
+            oldData.lote_id,
+            cookie.session.token
+          ).then((response) => {
+            if (response) {
+              dispatch({
+                type: Action.REMOVE_PROPIETARIO,
+                propietario_id: oldData.id,
+              });
+              resolve();
             }
-          );
+            reject();
+          });
         }, 3000);
       });
     },
@@ -60,7 +55,6 @@ function PropietariosTable(props) {
         }}
         title="Lista de Propietarios"
         editable={edit_actions}
-        // actions={actions}
         isLoading={loading}
         columns={columns}
         data={propietarios}
@@ -68,19 +62,11 @@ function PropietariosTable(props) {
           header: {
             actions: "  Acciones",
           },
-          body: {
-            addTooltip: "Agregar Lote",
-          },
         }}
-        detailPanel={[
-          {
-            render: PropietariosPanel,
-          },
-        ]}
       />
     </React.Fragment>
   );
-}
+};
 
 const columns = [
   { title: "Nombre", field: "name" },
