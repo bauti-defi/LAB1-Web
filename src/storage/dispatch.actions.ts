@@ -5,6 +5,8 @@ export enum Action {
   // Guardia
   ADD_GUARDIA,
   REMOVE_GUARDIA,
-
+  // Propietario
+  ADD_PROPIETARIO,
+  REMOVE_PROPIETARIO,
   LOADING,
-}
+  }

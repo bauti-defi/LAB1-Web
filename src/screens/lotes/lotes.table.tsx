@@ -12,7 +12,7 @@ import {
 import { Action } from "../../storage/dispatch.actions";
 import { Lote, useLoteSelector } from "../../storage/lotes.reducer";
 import "./lotes.table.css";
-import PropietariosPanel from "./propietario.panel";
+import PropietariosPanel from "../propietarios/propietarios.table";
 
 function LotesTable(props) {
   const [cookie] = useCookies();
@@ -108,11 +108,6 @@ function LotesTable(props) {
               addTooltip: "Agregar Lote",
             },
           }}
-          detailPanel={[
-            {
-              render: PropietariosPanel,
-            },
-          ]}
         />
       </ThemeProvider>
     </React.Fragment>

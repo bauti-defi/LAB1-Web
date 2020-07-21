@@ -1,24 +1,36 @@
+#outPopUp {
+  position: relative;
+  width: 100px;
+  height: 300px;
+  z-index: 15;
+  top: 80%;
+  left: 80%;
+  margin: 50px 0 0 -400px;
+  /* background: red; */
+}
+
 .modal {
     width: 80%;
   }
-  .modal > .header {
+  .flex-container > .header {
     width: 100%;
     border-bottom: 1px solid gray;
-    font-size: 18px;
+    font-size: 24px;
     text-align: center;
     padding: 5px;
   }
-  .modal > .content {
+  .flex-container > .content {
     width: 100%;
+    font-size: 14px;
     padding: 10px 5px;
   }
-  .modal > .actions {
+  .flex-container > .actions {
     width: 100%;
     padding: 10px 5px;
     margin: auto;
     text-align: center;
   }
-  .modal > .close {
+  .flex-container > .close {
     cursor: pointer;
     position: absolute;
     display: block;
