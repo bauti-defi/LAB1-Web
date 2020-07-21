@@ -10,13 +10,17 @@ import {
 } from "../../requests/lotes.requests";
 import { Action } from "../../storage/dispatch.actions";
 import { Lote, useLoteSelector } from "../../storage/lotes.reducer";
+import { useRootSelector } from "../../storage/root.reducer";
 import "./lotes.table.css";
 
 const LotesTable = (props) => {
   const [cookie] = useCookies();
   const lotes: Lote[] = useLoteSelector((state) => state?.lotes);
+  const s = useRootSelector((state) => state);
   const loading: boolean = useLoteSelector((state) => state?.loading);
   const dispatch = useDispatch();
+
+  console.log(s);
 
   const setLoading = (loading: boolean) =>
     dispatch({ type: Action.LOADING_LOTES, loading });

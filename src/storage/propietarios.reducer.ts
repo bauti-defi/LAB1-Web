@@ -6,6 +6,7 @@ import { useRootSelector } from "./root.reducer";
 export type Propietario = {
   lote_id: string;
   last_name: string;
+  first_name: string;
   doc_id: string;
   dev_id: string;
   email: string;

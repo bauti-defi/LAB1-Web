@@ -25,7 +25,6 @@ export const useLoteSelector: TypedUseSelectorHook<LoteState> = (selector) =>
   useRootSelector((state) => selector(state.lote));
 
 const loteReducer: Reducer = (state = initialState, action) => {
-  console.log(action);
   switch (action.type) {
     case Action.LOADING_LOTES:
       return { ...state, loading: action.loading };

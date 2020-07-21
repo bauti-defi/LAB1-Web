@@ -5,8 +5,8 @@ import loteReducer from "./lotes.reducer";
 import propietarioReducer from "./propietarios.reducer";
 
 const rootReducer = combineReducers({
-  lote: loteReducer,
   guardia: guardiaReducer,
+  lote: loteReducer,
   propietario: propietarioReducer,
 });
 

@@ -69,9 +69,9 @@ const PropietariosTable = (props) => {
 };
 
 const columns = [
-  { title: "Nombre", field: "name" },
-  { title: "Lote", field: "name" },
-  { title: "Fecha de asociación", field: "name" },
+  { title: "Nombre", field: "first_name" },
+  { title: "Apellido", field: "last_name" },
+  { title: "DNI", field: "doc_id" },
 ];
 
 const theme = createMuiTheme({
