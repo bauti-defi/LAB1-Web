@@ -18,6 +18,9 @@ function PanelNavBar() {
           {/* <Link to='/trabajadores'>Trabajadores</Link> */}
         {/* </li> */}
         <li>
+          <Link to="/propietarios">Propietarios</Link>
+        </li>
+        <li>
           <Link to='/guardias'>Guardias</Link>
         </li>
         <li>
